@@ -1,0 +1,28 @@
+{
+  "name": "mongos",
+  "description": "Role for Mongos",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "mongodb3" : {
+      "install" : {
+        "mongod" : false,
+        "configsvr" : false,
+        "mongos" : true
+      },
+      "config" : {
+        "mongos" : {
+          "port" : 27017,
+          "configsvr" : "server1, server2, server3"
+        }
+      }
+    }
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[mongodb3::default]"
+  ],
+  "env_run_lists": {
+  }
+}

@@ -1,0 +1,15 @@
+# THIS FILE IS MAINTAINED BY CHEF. DO NOT MODIFY AS IT WILL BE OVERWRITTEN.
+net:
+    bindIp: <%= @mongos_bind_ip %>
+    port: <%= @mongos_port %>
+replication:
+    localPingThresholdMs: <%= @localPingThresholdMs %>
+sharding:
+    autoSplit: <%= @autoSplit %>
+    configDB: <%= @configDB %>
+    chunkSize: <%= @chunkSize %>
+systemLog:
+    destination: file
+    path: <%= @log_path %>
+    logAppend: true
+    traceAllExceptions: true

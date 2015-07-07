@@ -1,0 +1,23 @@
+{
+  "name": "replica",
+  "description": "Role for Replica set",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "mongodb3" : {
+      "install" : {
+        "mongod" : true
+      },
+      "config" : {
+        "replset_name" : "replset-1"
+      }
+    }
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[mongodb3::default]"
+  ],
+  "env_run_lists": {
+  }
+}
