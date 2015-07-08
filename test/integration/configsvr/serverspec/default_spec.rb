@@ -25,7 +25,7 @@ describe service('mongod') do
   it { should be_running }
 end
 
-# Test mongodb port `27017` is listening.
+# Test mongodb port `27019` is listening.
 describe port(27019) do
   it { should be_listening }
 end
@@ -40,11 +40,6 @@ describe file('/etc/mongod.conf') do
   it { should be_file }
   it { should be_owned_by 'root' }
   it { should be_grouped_into 'root' }
-end
-
-# Test mongodb replicaset key file is created with right permission.
-describe file('/etc/mongodb.key') do
-  it { should_not be_file }
 end
 
 # Test mongodb data directory is created with right permission.

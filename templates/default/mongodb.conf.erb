@@ -3,6 +3,9 @@ net:
     bindIp: <%= @bind_ip %>
     port: <%= @port %>
 operationProfiling: {}
+processManagement:
+    fork: <%= node['mongodb3']['config']['processManagement']['fork'] %>
+    pidFilePath: <%= node['mongodb3']['config']['processManagement']['pidFilePath'] %>
 <% unless @replset_name.to_s.empty? -%>
 replication:
     replSetName: <%= @replset_name %>

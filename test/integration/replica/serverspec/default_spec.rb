@@ -42,14 +42,6 @@ describe file('/etc/mongod.conf') do
   it { should be_grouped_into 'root' }
 end
 
-# Test mongodb replicaset key file is created with right permission.
-describe file('/etc/mongodb.key') do
-  it { should be_file }
-  it { should be_mode 600 }
-  it { should be_owned_by mongo_user }
-  it { should be_grouped_into mongo_user }
-end
-
 # Test mongodb data directory is created with right permission.
 describe file(mongo_data_dir) do
   it { should be_directory }

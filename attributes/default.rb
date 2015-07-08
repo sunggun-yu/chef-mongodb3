@@ -25,19 +25,19 @@ case node['platform_family']
     mongo_user = 'mongod'
     mongo_group = 'mongod'
     mongo_dbpath = '/var/lib/mongo'
+    mongo_pid_file = '/var/run/mongodb/mongodb.pid'
     default['mongodb3']['version'] = "#{node['mongodb3']['version']}-1.el6"
   when 'debian'
     mongo_user = 'mongodb'
     mongo_group = 'mongodb'
     mongo_dbpath = '/var/lib/mongodb'
+    mongo_pid_file = '/var/run/mongodb.pid'
 end
 
 default['mongodb3']['user'] = mongo_user
 default['mongodb3']['group'] = mongo_group
 
-# mongod, mongos, configsvr
-default['mongodb3']['install']['type'] = 'mongod'
-
+# MongoDB instance type : mongod, mongos, configsvr
 default['mongodb3']['install']['mongod'] = true
 default['mongodb3']['install']['configsvr'] = false
 default['mongodb3']['install']['mongos'] = false
@@ -55,6 +55,10 @@ default['mongodb3']['config']['key_file'] = '/etc/mongodb.key'
 default['mongodb3']['config']['key_file_content'] = nil
 default['mongodb3']['config']['db_path'] = mongo_dbpath
 default['mongodb3']['config']['log_path'] = '/var/log/mongodb/mongod.log'
+
+# Config - ProcessManagement
+default['mongodb3']['config']['processManagement']['fork'] = true
+default['mongodb3']['config']['processManagement']['pidFilePath'] = mongo_pid_file
 
 # MongoDB Storage Engine - mmapv1 | wiredTiger. Default is mmapv1
 default['mongodb3']['config']['storage']['engine'] = 'mmapv1'

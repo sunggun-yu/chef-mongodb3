@@ -11,6 +11,7 @@ provisioner:
 
 platforms:
   - name: ubuntu-12.04
+  - name: centos-6.6
   - name: oel-6.6
     driver:
       box: rafacas/oel66-plain

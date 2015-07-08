@@ -3,11 +3,11 @@ require 'spec_helper'
 # RHEL and Debian family has different value for some of mongodb settings.
 if os[:family] == 'redhat'
   mongo_user = 'mongod'
-  mongo_data_dir = '/var/lib/mongo/wiredTiger'
 elsif ['debian', 'ubuntu']
   mongo_user = 'mongodb'
-  mongo_data_dir = '/var/lib/mongodb/wiredTiger'
 end
+
+mongo_data_dir = '/var/lib/mongodb/wiredTiger'
 
 # Test `mongodb-org` package is installed.
 describe package('mongodb-org') do
