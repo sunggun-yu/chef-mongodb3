@@ -1,6 +1,7 @@
 language: ruby
 rvm:
 - 2.1.0
+bundler_args: --without integration
 gemfile:
   - Gemfile
 branches:
@@ -11,4 +12,3 @@ before_script:
   - bundle exec berks
 script:
   - bundle exec foodcritic .
-  - bundle exec kitchen test
