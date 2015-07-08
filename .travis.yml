@@ -7,3 +7,8 @@ branches:
   only:
     - master
     - develop
+before_script:
+  - bundle exec berks
+script:
+  - bundle exec foodcritic .
+  - bundle exec kitchen test
