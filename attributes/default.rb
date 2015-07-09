@@ -80,7 +80,7 @@ default['mongodb3']['config']['mongod']['systemLog']['component']['storage']['jo
 default['mongodb3']['config']['mongod']['systemLog']['component']['write']['verbosity'] = nil # default : 0
 
 # processManagement Options : http://docs.mongodb.org/manual/reference/configuration-options/#processmanagement-options
-default['mongodb3']['config']['mongod']['processManagement']['fork'] = false
+default['mongodb3']['config']['mongod']['processManagement']['fork'] = true # default : false
 default['mongodb3']['config']['mongod']['processManagement']['pidFilePath'] = mongo_pid_file
 
 # net Options : http://docs.mongodb.org/manual/reference/configuration-options/#net-options
