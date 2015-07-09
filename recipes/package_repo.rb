@@ -22,10 +22,11 @@ case node['platform_family']
   when 'rhel', 'fedora'
     yum_repository 'mongodb-org-3.0' do
       description 'MongoDB Repository'
-      baseurl "https://repo.mongodb.org/yum/redhat/6/mongodb-org/3.0/#{node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i686'}"
+      baseurl "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.0/#{node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i686'}"
       action :create
       gpgcheck false
       enabled true
+      sslverify false
     end
   when 'debian'
     apt_repository 'mongodb' do
