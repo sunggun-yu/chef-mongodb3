@@ -4,8 +4,15 @@
   "json_class": "Chef::Role",
   "default_attributes": {
     "mongodb3": {
-      "install" : {
-        "configsvr" : true
+      "config" : {
+        "mongod" : {
+          "net" : {
+            "port" : 27019
+          },
+          "sharding" : {
+            "clusterRole" : "configsvr"
+          }
+        }
       }
     }
   },

@@ -5,9 +5,25 @@
   "default_attributes": {
     "mongodb3" : {
       "config" : {
-        "db_path" : "/var/lib/mongodb/wiredTiger",
-        "storage" : {
-          "engine" : "wiredTiger"
+        "mongod" : {
+          "storage" : {
+            "dbPath" : "/var/lib/mongodb/wiredTiger",
+            "engine" : "wiredTiger",
+            "wiredTiger" : {
+              "engineConfig" : {
+                "cacheSizeGB" : 10,
+                "statisticsLogDelaySecs" : 60,
+                "journalCompressor" : "snappy",
+                "directoryForIndexes" : false
+              },
+              "collectionConfig" : {
+                "blockCompressor" : "snappy"
+              },
+              "indexConfig" : {
+                "prefixCompression" : true
+              }
+            }
+          }
         }
       }
     }

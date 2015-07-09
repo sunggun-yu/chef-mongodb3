@@ -1,5 +1,7 @@
 # mongodb3-cookbook
 
+[![Build Status](https://travis-ci.org/sunggun-yu/chef-mongodb3.svg?branch=develop)](https://travis-ci.org/sunggun-yu/chef-mongodb3)
+
 TODO: Enter the cookbook description here.
 
 ## Supported Platforms

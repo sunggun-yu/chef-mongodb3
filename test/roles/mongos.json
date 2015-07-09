@@ -4,15 +4,11 @@
   "json_class": "Chef::Role",
   "default_attributes": {
     "mongodb3" : {
-      "install" : {
-        "mongod" : false,
-        "configsvr" : false,
-        "mongos" : true
-      },
       "config" : {
         "mongos" : {
-          "port" : 27017,
-          "configsvr" : "server1, server2, server3"
+          "sharding" : {
+            "configDB" : "server1, server2, server3"
+          }
         }
       }
     }
@@ -21,7 +17,7 @@
   },
   "chef_type": "role",
   "run_list": [
-    "recipe[mongodb3::default]"
+    "recipe[mongodb3::mongos]"
   ],
   "env_run_lists": {
   }

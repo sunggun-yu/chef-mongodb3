@@ -4,11 +4,12 @@
   "json_class": "Chef::Role",
   "default_attributes": {
     "mongodb3" : {
-      "install" : {
-        "mongod" : true
-      },
       "config" : {
-        "replset_name" : "replset-1"
+        "mongod" : {
+          "replication" : {
+            "replSetName" : "replset-1"
+          }
+        }
       }
     }
   },

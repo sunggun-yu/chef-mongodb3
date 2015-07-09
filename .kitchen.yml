@@ -4,7 +4,7 @@ driver:
 
 provisioner:
   name: chef_zero
-  require_chef_omnibus: latest
+  require_chef_omnibus: true
   environments_path:    'test/environments'
   data_bags_path:       'test/data_bags'
   roles_path:           'test/roles'
