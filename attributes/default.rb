@@ -28,11 +28,13 @@ case node['platform_family']
     mongo_dbpath = '/var/lib/mongo'
     mongo_pid_file = '/var/run/mongodb/mongodb.pid'
     default['mongodb3']['version'] = "#{node['mongodb3']['version']}-1.el6"
+    config_processManagement_fork = true
   when 'debian'
     mongo_user = 'mongodb'
     mongo_group = 'mongodb'
     mongo_dbpath = '/var/lib/mongodb'
-    mongo_pid_file = '/var/run/mongodb.pid'
+    mongo_pid_file = nil
+    config_processManagement_fork = nil
 end
 
 # MongoDB user:group
@@ -80,7 +82,8 @@ default['mongodb3']['config']['mongod']['systemLog']['component']['storage']['jo
 default['mongodb3']['config']['mongod']['systemLog']['component']['write']['verbosity'] = nil # default : 0
 
 # processManagement Options : http://docs.mongodb.org/manual/reference/configuration-options/#processmanagement-options
-default['mongodb3']['config']['mongod']['processManagement']['fork'] = true # default : false
+
+default['mongodb3']['config']['mongod']['processManagement']['fork'] = config_processManagement_fork # default : false
 default['mongodb3']['config']['mongod']['processManagement']['pidFilePath'] = mongo_pid_file
 
 # net Options : http://docs.mongodb.org/manual/reference/configuration-options/#net-options
