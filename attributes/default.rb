@@ -188,3 +188,11 @@ default['mongodb3']['config']['mongos']['replication']['localPingThresholdMs'] =
 default['mongodb3']['config']['mongos']['sharding']['autoSplit'] = true # default : true
 default['mongodb3']['config']['mongos']['sharding']['configDB'] = nil
 default['mongodb3']['config']['mongos']['sharding']['chunkSize'] = 64 # default : 64
+
+# MMS automation agent config attribute
+default['mongodb3']['config']['mms']['mmsGroupId'] = nil
+default['mongodb3']['config']['mms']['mmsApiKey'] = nil
+default['mongodb3']['config']['mms']['logLevel'] = 'INFO'
+default['mongodb3']['config']['mms']['maxLogFiles'] = 10
+default['mongodb3']['config']['mms']['maxLogFileSize'] = 268435456
+default['mongodb3']['config']['mms']['httpProxy'] = nil

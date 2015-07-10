@@ -121,3 +121,24 @@ suites:
         environment: dev
     excludes:
       - oel-6.6
+
+  - name: mms-agent
+    driver:
+      vm_hostname: mms-agent
+    run_list:
+      - recipe[apt]
+      - role[mms_agent]
+    attributes:
+      chef_client:
+        config:
+          force_logger: true
+          log_level: info
+      build-essential:
+        compile_time: false
+      apt:
+        compile_time_update: true
+    provisioner:
+      client_rb:
+        environment: dev
+    excludes:
+      - oel-6.6
