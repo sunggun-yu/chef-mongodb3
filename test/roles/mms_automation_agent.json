@@ -1,5 +1,5 @@
 {
-  "name": "mms_agent",
+  "name": "mms_automation_agent",
   "description": "Role for MMS automation agent",
   "json_class": "Chef::Role",
   "default_attributes": {
@@ -16,7 +16,7 @@
   },
   "chef_type": "role",
   "run_list": [
-    "recipe[mongodb3::mms_agent]"
+    "recipe[mongodb3::mms_automation_agent]"
   ],
   "env_run_lists": {
   }

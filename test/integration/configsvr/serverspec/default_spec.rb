@@ -9,11 +9,6 @@ elsif ['debian', 'ubuntu']
   mongo_data_dir = '/var/lib/mongodb'
 end
 
-# Test `mongodb-org` package is installed.
-describe package('mongodb-org') do
-  it { should be_installed }
-end
-
 # Test `mongodb-org-server` package is installed.
 describe package('mongodb-org-server') do
   it { should be_installed }

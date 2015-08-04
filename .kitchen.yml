@@ -40,6 +40,29 @@ suites:
     excludes:
       - oel-6.6
 
+  - name: default-305
+    driver:
+      vm_hostname: mongo3
+    run_list:
+      - recipe[apt]
+      - recipe[mongodb3::default]
+    attributes:
+      mongodb3:
+        version: 3.0.5
+      chef_client:
+        config:
+          force_logger: true
+          log_level: info
+      build-essential:
+        compile_time: false
+      apt:
+        compile_time_update: true
+    provisioner:
+      client_rb:
+        environment: dev
+    excludes:
+      - oel-6.6
+
   - name: replica
     driver:
       vm_hostname: replica
@@ -122,12 +145,33 @@ suites:
     excludes:
       - oel-6.6
 
-  - name: mms-agent
+  - name: mms-automation-agent
     driver:
-      vm_hostname: mms-agent
+      vm_hostname: mms-automation-agent
     run_list:
       - recipe[apt]
-      - role[mms_agent]
+      - role[mms_automation_agent]
+    attributes:
+      chef_client:
+        config:
+          force_logger: true
+          log_level: info
+      build-essential:
+        compile_time: false
+      apt:
+        compile_time_update: true
+    provisioner:
+      client_rb:
+        environment: dev
+    excludes:
+      - oel-6.6
+
+  - name: mms-monitoring-agent
+    driver:
+      vm_hostname: mms-monitoring-agent
+    run_list:
+      - recipe[apt]
+      - role[mms_monitoring_agent]
     attributes:
       chef_client:
         config:
