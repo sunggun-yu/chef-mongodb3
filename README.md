@@ -2,7 +2,7 @@
 
 WARNING : `mms-agent` recipe has been deprecated.
 
-[![Build Status](https://travis-ci.org/sunggun-yu/chef-mongodb3.svg?branch=develop)](https://travis-ci.org/sunggun-yu/chef-mongodb3)
+[![Build Status](https://travis-ci.org/sunggun-yu/chef-mongodb3.svg?branch=master)](https://travis-ci.org/sunggun-yu/chef-mongodb3)
 
 Install and configure the MongoDB 3.0.x
 
