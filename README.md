@@ -1,6 +1,8 @@
 # mongodb3 cookbook
 
-[![Build Status](https://travis-ci.org/sunggun-yu/chef-mongodb3.svg?branch=master)](https://travis-ci.org/sunggun-yu/chef-mongodb3)
+WARNING : `mms-agent` recipe has been deprecated.
+
+[![Build Status](https://travis-ci.org/sunggun-yu/chef-mongodb3.svg?branch=develop)](https://travis-ci.org/sunggun-yu/chef-mongodb3)
 
 Install and configure the MongoDB 3.0.x
 
@@ -8,6 +10,7 @@ Install and configure the MongoDB 3.0.x
 * Install and configure the mongos
  * Also, mongos configure the mongos service with runit : `service mongos start|stop|restart|status` 
 * Install the MMS Automation Agent
+* Install the MMS Monitoring Agent
 
 ## Supported Platforms
 
@@ -19,11 +22,13 @@ Install and configure the MongoDB 3.0.x
 
 ### Cookbook Attributes
 
+WARNING : Please do not set the user and group attribute on your side. This cook book let installing user and group by mongodb package (except `mongos` and `mms-monitoring-agent` recipe). The user and group name will be set by condition in default attribute because mongodb package installs different user and group name by platform.
+
 ```
 # MongoDB version to install
-default['mongodb3']['version'] = '3.0.4' or '3.0.4-1.el[5|6]'
+default['mongodb3']['version'] = '3.0.4'
 
-# MongoDB user:group
+# MongoDB user:group : PLEASE DO NOT SET THE USER AND GROUP ATTRIBUTE
 default['mongodb3']['user'] = 'mongod' | 'mongodb'
 default['mongodb3']['group'] = 'mongod' | 'mongodb'
 
@@ -315,16 +320,30 @@ Include `mongodb3::mongos` in your node's `run_list`:
 }
 ```
 
-### mongodb3::mms_agent
+### mongodb3::mms\_automation_agent
 
 Install the MMS Automation Agent.
 
-Include `mongodb3::mms_agent` in your node's `run_list`:
+Include `mongodb3::mms_automation_agent` in your node's `run_list`:
 
 ```json
 {
   "run_list": [
-    "recipe[mongodb3::mms_agent]"
+    "recipe[mongodb3::mms_automation_agent]"
+  ]
+}
+```
+
+### mongodb3::mms\_monitoring_agent
+
+Install the MMS Monitoring Agent.
+
+Include `mongodb3::mms_monitoring_agent` in your node's `run_list`:
+
+```json
+{
+  "run_list": [
+    "recipe[mongodb3::mms_monitoring_agent]"
   ]
 }
 ```
@@ -614,7 +633,7 @@ You can set the config attribute on node or wrapper recipe.
 
 ```json
 {
-  "name": "mms_agent",
+  "name": "mms_automation_agent",
   "description": "Role for MMS automation agent",
   "json_class": "Chef::Role",
   "default_attributes": {
@@ -631,7 +650,7 @@ You can set the config attribute on node or wrapper recipe.
   },
   "chef_type": "role",
   "run_list": [
-    "recipe[mongodb3::mms_agent]"
+    "recipe[mongodb3::mms_automation_agent]"
   ],
   "env_run_lists": {
   }
@@ -693,6 +712,58 @@ maxLogFileSize=268435456
 
 # For additional optional settings, please see
 # https://docs.cloud.mongodb.com/reference/automation-agent/
+
+```
+
+### MMS Monitoring agent
+
+#### Role file
+
+You can set the config attribute on node or wrapper recipe.
+
+```json
+{
+  "name": "mms_monitoring_agent",
+  "description": "Role for MMS monitoring agent",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "mongodb3" : {
+      "config" : {
+        "mms" : {
+          "api_key" : "apikeykekekekeke"
+        }
+      }
+    }
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[mongodb3::mms_monitoring_agent]"
+  ],
+  "env_run_lists": {
+  }
+}
+
+```
+
+#### Result of `/etc/mongodb-mms/monitoring-agent.config`
+
+```text
+# THIS FILE IS MAINTAINED BY CHEF. DO NOT MODIFY AS IT WILL BE OVERWRITTEN.
+
+#
+# Enter your API key  - See: cloud.mongodb.com/settings/group
+#
+mmsApiKey=apikeykekekekeke
+
+#
+# Hostname of the MMS monitoring web server.
+#
+mmsBaseUrl=https://api-agents.mongodb.com
+
+# For additional optional settings, please see
+# https://docs.cloud.mongodb.com/reference/monitoring-agent/
 
 ```
 

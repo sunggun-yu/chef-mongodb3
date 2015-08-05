@@ -1,0 +1,22 @@
+{
+  "name": "mms_monitoring_agent",
+  "description": "Role for MMS automation agent",
+  "json_class": "Chef::Role",
+  "default_attributes": {
+    "mongodb3" : {
+      "config" : {
+        "mms" : {
+          "mmsApiKey" : "apikeykekekekeke"
+        }
+      }
+    }
+  },
+  "override_attributes": {
+  },
+  "chef_type": "role",
+  "run_list": [
+    "recipe[mongodb3::mms_monitoring_agent]"
+  ],
+  "env_run_lists": {
+  }
+}

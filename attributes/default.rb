@@ -27,7 +27,6 @@ case node['platform_family']
     mongo_group = 'mongod'
     mongo_dbpath = '/var/lib/mongo'
     mongo_pid_file = '/var/run/mongodb/mongodb.pid'
-    default['mongodb3']['version'] = "#{node['mongodb3']['version']}-1.el#{node.platform_version.to_i}" # ~FC019
     config_processManagement_fork = true
   when 'debian'
     mongo_user = 'mongodb'

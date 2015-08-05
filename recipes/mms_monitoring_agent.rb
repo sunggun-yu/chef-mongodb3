@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: mongodb3
-# Recipe:: mms_agent
+# Recipe:: mms_monitoring_agent
 #
 # Copyright 2015, Sunggun Yu
 #
@@ -25,49 +25,46 @@ end
 # Set variables by platform
 case node['platform_family']
   when 'rhel', 'fedora'
-    mms_agent_source = 'https://cloud.mongodb.com/download/agent/automation/mongodb-mms-automation-agent-manager-latest.x86_64.rpm'
-    mms_agent_file = '/root/mongodb-mms-automation-agent-manager-latest.x86_64.rpm'
+    mms_agent_source = 'https://cloud.mongodb.com/download/agent/monitoring/mongodb-mms-monitoring-agent-latest.x86_64.rpm'
+    mms_agent_file = '/root/mongodb-mms-monitoring-agent-latest.x86_64.rpm'
   when 'debian'
-    mms_agent_source = 'https://cloud.mongodb.com/download/agent/automation/mongodb-mms-automation-agent-manager_latest_amd64.deb'
-    mms_agent_file = '/root/mongodb-mms-automation-agent-manager_latest_amd64.deb'
+    mms_agent_source = 'https://cloud.mongodb.com/download/agent/monitoring/mongodb-mms-monitoring-agent_latest_amd64.deb'
+    mms_agent_file = '/root/mongodb-mms-monitoring-agent_latest_amd64.deb'
 end
 
 # Download the mms automation agent manager latest
 remote_file mms_agent_file do
   source mms_agent_source
-  owner 'root'
-  group 'root'
-  mode '0644'
   action :create
 end
 
 # Install package
 case node['platform_family']
   when 'rhel', 'fedora'
-    rpm_package 'mongodb-mms-automation-agent-manager' do
+    rpm_package 'mongodb-mms-monitoring-agent' do
       source mms_agent_file
       action :install
     end
   when 'debian'
-    dpkg_package 'mongodb-mms-automation-agent-manager' do
+    dpkg_package 'mongodb-mms-monitoring-agent' do
       source mms_agent_file
       action :install
     end
 end
 
 # Create or modify the mms agent config file
-template '/etc/mongodb-mms/automation-agent.config' do
-  source 'automation-agent.config.erb'
+template '/etc/mongodb-mms/monitoring-agent.config' do
+  source 'monitoring-agent.config.erb'
   mode 0600
-  owner node['mongodb3']['user']
-  group node['mongodb3']['group']
+  owner 'mongodb-mms-agent'
+  group 'mongodb-mms-agent'
   variables(
       :config => node['mongodb3']['config']['mms']
   )
 end
 
 # Start the mms automation agent
-service 'mongodb-mms-automation-agent' do
+service 'mongodb-mms-monitoring-agent' do
   # The service provider of MMS Agent for Ubuntu is upstart
   provider Chef::Provider::Service::Upstart if node['platform_family'] == 'debian'
   supports :status => true, :restart => true, :stop => true
