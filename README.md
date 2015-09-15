@@ -640,8 +640,8 @@ You can set the config attribute on node or wrapper recipe.
     "mongodb3" : {
       "config" : {
         "mms" : {
-          "group_id" : "grpgrpididid",
-          "api_key" : "apikeykekekekeke"
+          "mmsGroupId" : "grpgrpididid",
+          "mmsApiKey" : "apikeykekekekeke"
         }
       }
     }
