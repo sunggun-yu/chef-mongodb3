@@ -49,6 +49,9 @@ default['mongodb3']['mongos']['config_file'] = '/etc/mongos.conf'
 # Key file contents
 default['mongodb3']['config']['key_file_content'] = nil
 
+# Key server
+default['mongodb3']['keyserver'] = 'hkp://keyserver.ubuntu.com:80'
+
 # Mongod config
 # The default value of the attribute is referred to the MongoDB documentation.
 # The attribute value of nil will be removed from mongod config file.

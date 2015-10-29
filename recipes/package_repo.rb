@@ -33,7 +33,7 @@ case node['platform_family']
       uri 'http://repo.mongodb.org/apt/ubuntu'
       distribution "#{node['lsb']['codename']}/mongodb-org/stable"
       components ['multiverse']
-      keyserver 'hkp://keyserver.ubuntu.com:80'
+      keyserver node['mongodb3']['keyserver']
       key '7F0CEB10'
       action :add
     end
