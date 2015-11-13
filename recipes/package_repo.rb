@@ -16,13 +16,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
+puts node['platform']
 # Add the MongoDB 3.0 Package repository
 case node['platform_family']
   when 'rhel', 'fedora'
+    yum_base_url = "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.0/#{node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i686'}"
+    if node['platform'] == 'amazon'
+      yum_base_url = 'https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.0/x86_64/'
+    end
     yum_repository 'mongodb-org-3.0' do
       description 'MongoDB Repository'
-      baseurl "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.0/#{node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i686'}"
+      baseurl yum_base_url
       action :create
       gpgcheck false
       enabled true

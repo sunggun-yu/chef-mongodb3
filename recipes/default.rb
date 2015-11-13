@@ -23,11 +23,14 @@ include_recipe 'mongodb3::package_repo'
 install_package = %w(mongodb-org-server mongodb-org-shell mongodb-org-tools)
 
 # Setup package version to install
+package_version = node['mongodb3']['version']
 case node['platform_family']
   when 'rhel', 'fedora'
-    package_version = "#{node['mongodb3']['version']}-1.el#{node.platform_version.to_i}" # ~FC019
-  when 'debian'
-    package_version = node['mongodb3']['version']
+    if node['platform'] == 'amazon'
+      package_version = "#{node['mongodb3']['version']}-1.amzn1" # ~FC019
+    else
+      package_version = "#{node['mongodb3']['version']}-1.el#{node.platform_version.to_i}" # ~FC019
+    end
 end
 
 install_package.each do |pkg|
