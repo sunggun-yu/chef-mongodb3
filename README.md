@@ -10,6 +10,10 @@ Install and configure the MongoDB 3
 * Install the MMS Automation Agent
 * Install the MMS Monitoring Agent
 
+NOTICE :
+* Current version 3.0.0 is not supporting mongos for Oracle Linux 6.6. The package version 3.0.7-1.el6 of mongos package wasn't existing (Test failure).
+* Current version 3.0.0 is not supporting automation and monitoring mms agent installation for Debian 7.8
+
 ## Supported Platforms
 
 * Ubuntu 12.04, 14.04

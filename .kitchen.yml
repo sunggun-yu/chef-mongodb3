@@ -131,6 +131,7 @@ suites:
       client_rb:
         environment: dev
     excludes:
+      - oel-6.6
       - ami-2014.03
 
   - name: wired-tiger
@@ -176,6 +177,7 @@ suites:
     excludes:
       - oel-6.6
       - ami-2014.03
+      - debian-7.8
 
   - name: mms-monitoring-agent
     driver:
@@ -198,6 +200,7 @@ suites:
     excludes:
       - oel-6.6
       - ami-2014.03
+      - debian-7.8
 
   - name: ami-default
     driver:
