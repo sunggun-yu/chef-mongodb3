@@ -18,7 +18,39 @@
 #
 
 # MongoDB version to install
-default['mongodb3']['version'] = '3.0.4'
+default['mongodb3']['version'] = '3.0.7'
+
+# Setup default package version attribute to install
+pkg_version = node['mongodb3']['version']
+case node['platform_family']
+  when 'rhel', 'fedora'
+    pkg_version =  "#{node['mongodb3']['version']}-1.el#{node.platform_version.to_i}" # ~FC019
+    if node['platform'] == 'amazon'
+      pkg_version = "#{node['mongodb3']['version']}-1.amzn1" # ~FC019
+    end
+end
+
+# Setup default package repo url attribute for each platform family or platform
+case node['platform']
+  when 'redhat', 'oracle','centos', 'fedora'
+    pkg_repo = "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.0/#{node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i686'}"
+  when 'amazon'
+    pkg_repo = 'https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.0/x86_64/'
+  when 'ubuntu'
+    pkg_repo = 'http://repo.mongodb.org/apt/ubuntu'
+  when 'debian'
+    pkg_repo = 'http://repo.mongodb.org/apt/debian'
+end
+
+# Setup apt variables
+case node['platform']
+  when 'ubuntu'
+    apt_repo_keyserver = 'hkp://keyserver.ubuntu.com:80'
+    apt_repo_component = ['multiverse']
+  when 'debian'
+    apt_repo_keyserver = 'keyserver.ubuntu.com'
+    apt_repo_component = ['main']
+end
 
 # Default attribute for MongoDB installation
 case node['platform_family']
@@ -36,6 +68,17 @@ case node['platform_family']
     config_processManagement_fork = nil
 end
 
+# MongoDB package repo url
+default['mongodb3']['package']['repo']['url'] = pkg_repo
+
+# MongoDB apt keyserver and key
+default['mongodb3']['package']['repo']['apt']['keyserver'] = apt_repo_keyserver
+default['mongodb3']['package']['repo']['apt']['key'] = '7F0CEB10'
+default['mongodb3']['package']['repo']['apt']['components'] = apt_repo_component
+
+# MongoDB package version to install
+default['mongodb3']['package']['version'] = pkg_version
+
 # MongoDB user:group
 default['mongodb3']['user'] = mongo_user
 default['mongodb3']['group'] = mongo_group
@@ -48,6 +91,9 @@ default['mongodb3']['mongos']['config_file'] = '/etc/mongos.conf'
 
 # Key file contents
 default['mongodb3']['config']['key_file_content'] = nil
+
+# Key server
+default['mongodb3']['keyserver'] = 'hkp://keyserver.ubuntu.com:80'
 
 # Mongod config
 # The default value of the attribute is referred to the MongoDB documentation.

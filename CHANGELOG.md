@@ -1,5 +1,17 @@
 # mongodb3 Cookbook CHANGELOG
 
+## 3.0.0
+* Update the default MongoDB package version to 3.0.7
+* Update README.md #8
+* Make keyserver configurable and fix faraday (berkshelf version bump) #11
+* Adding support for Amazon Linux and Debian 7.8 #10
+* Removing support for CentOS 5 : It seems like, there is some issue on package that MongoDB provided.
+* Removing kitchen test of mongos for oel-6.6 : There was no 3.0.7-1.el6 of mongos package for Oracle Linux 6.6 (Test failure). I'll keep testing and bring it back later.
+
+NOTICE :
+* Current version 3.0.0 is not supporting mongos 3.0.7 for Oracle Linux 6.6. The package version 3.0.7-1.el6 of mongodb-org-shell package wasn't existing (Test failure).
+* Current version 3.0.0 is not supporting automation and monitoring mms agent installation for Debian 7.8 
+
 ## 2.0.0
 
 WARNING : `mms-agent` recipe has been deprecated at this version.
