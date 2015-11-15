@@ -16,17 +16,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-puts node['platform']
+
 # Add the MongoDB 3.0 Package repository
 case node['platform_family']
   when 'rhel', 'fedora'
-    yum_base_url = "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.0/#{node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i686'}"
-    if node['platform'] == 'amazon'
-      yum_base_url = 'https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.0/x86_64/'
-    end
     yum_repository 'mongodb-org-3.0' do
       description 'MongoDB Repository'
-      baseurl yum_base_url
+      baseurl node['mongodb3']['package']['repo']['url']
       action :create
       gpgcheck false
       enabled true
@@ -34,11 +30,11 @@ case node['platform_family']
     end
   when 'debian'
     apt_repository 'mongodb' do
-      uri 'http://repo.mongodb.org/apt/ubuntu'
+      uri node['mongodb3']['package']['repo']['url']
       distribution "#{node['lsb']['codename']}/mongodb-org/stable"
-      components ['multiverse']
-      keyserver 'hkp://keyserver.ubuntu.com:80'
-      key '7F0CEB10'
+      components node['mongodb3']['package']['repo']['apt']['components']
+      keyserver node['mongodb3']['package']['repo']['apt']['keyserver']
+      key node['mongodb3']['package']['repo']['apt']['key']
       action :add
     end
     include_recipe 'apt'
