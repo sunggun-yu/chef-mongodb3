@@ -1,6 +1,7 @@
 # mongodb3 Cookbook CHANGELOG
 
 ## 3.0.0
+* Update the default MongoDB package version to 3.0.7
 * Update README.md #8
 * Make keyserver configurable and fix faraday (berkshelf version bump) #11
 * Adding support for Amazon Linux and Debian 7.8 #10

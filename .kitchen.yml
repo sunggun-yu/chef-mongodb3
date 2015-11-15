@@ -220,3 +220,4 @@ suites:
       - ubuntu-12.04
       - centos-6.6
       - oel-6.6
+      - debian-7.8

@@ -27,7 +27,7 @@ WARNING : Please do not set the user and group attribute on your side. This cook
 
 ```
 # MongoDB version to install
-default['mongodb3']['version'] = '3.0.4'
+default['mongodb3']['version'] = '3.0.7'
 default['mongodb3']['package']['version'] = Actual package version to install. It builds from version attribute.
 
 # Package repository url
