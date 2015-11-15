@@ -1,10 +1,8 @@
 # mongodb3 cookbook
 
-WARNING : `mms-agent` recipe has been deprecated.
-
 [![Build Status](https://travis-ci.org/sunggun-yu/chef-mongodb3.svg?branch=master)](https://travis-ci.org/sunggun-yu/chef-mongodb3)
 
-Install and configure the MongoDB 3.0.x
+Install and configure the MongoDB 3
 
 * Install and configure the mongod (or configure the config server for shard cluster)
 * Install and configure the mongos
@@ -15,18 +13,30 @@ Install and configure the MongoDB 3.0.x
 ## Supported Platforms
 
 * Ubuntu 12.04, 14.04
-* CentOS 5.11, 6.6
+* Debian 7.8
+* CentOS 6.6
 * Oralce 6.6
+* Amazon Linux
 
 ## Attributes
 
 ### Cookbook Attributes
+mongodb3 cookbook uses the package installation of mongodb3 such as yum or apt. and these attributes are used for setting default values in order to provide the correct installation of mongodb3. typically, you can modify cookbook attributes if you need. however, I do not recommend to modify these attributes if you want to use package that is provided from MongoDB.
 
 WARNING : Please do not set the user and group attribute on your side. This cook book let installing user and group by mongodb package (except `mongos` and `mms-monitoring-agent` recipe). The user and group name will be set by condition in default attribute because mongodb package installs different user and group name by platform.
 
 ```
 # MongoDB version to install
 default['mongodb3']['version'] = '3.0.4'
+default['mongodb3']['package']['version'] = Actual package version to install. It builds from version attribute.
+
+# Package repository url
+default['mongodb3']['package']['repo']['url'] = Package repository url
+
+# Attribute for apt_repository
+default['mongodb3']['package']['repo']['apt']['keyserver'] = key server url for ubuntu or debian
+default['mongodb3']['package']['repo']['apt']['key'] = '7F0CEB10'
+default['mongodb3']['package']['repo']['apt']['components'] = `multiverse` for ubuntu. `main` for debian
 
 # MongoDB user:group : PLEASE DO NOT SET THE USER AND GROUP ATTRIBUTE
 default['mongodb3']['user'] = 'mongod' | 'mongodb'

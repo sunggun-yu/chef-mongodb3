@@ -1,5 +1,11 @@
 # mongodb3 Cookbook CHANGELOG
 
+## 3.0.0
+* Update README.md #8
+* Make keyserver configurable and fix faraday (berkshelf version bump) #11
+* Adding support for Amazon Linux and Debian 7.8 #10
+* Removing support for CentOS 5 : It seems like, there is some issue on package that MongoDB provided.
+
 ## 2.0.0
 
 WARNING : `mms-agent` recipe has been deprecated at this version.
