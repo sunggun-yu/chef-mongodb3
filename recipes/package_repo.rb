@@ -22,7 +22,7 @@ case node['platform_family']
   when 'rhel', 'fedora'
     yum_repository 'mongodb-org-3.0' do
       description 'MongoDB Repository'
-      baseurl "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.0/#{node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i686'}"
+      baseurl node['mongodb3']['package']['repo']['url']
       action :create
       gpgcheck false
       enabled true
@@ -30,11 +30,11 @@ case node['platform_family']
     end
   when 'debian'
     apt_repository 'mongodb' do
-      uri 'http://repo.mongodb.org/apt/ubuntu'
+      uri node['mongodb3']['package']['repo']['url']
       distribution "#{node['lsb']['codename']}/mongodb-org/stable"
-      components ['multiverse']
-      keyserver node['mongodb3']['keyserver']
-      key '7F0CEB10'
+      components node['mongodb3']['package']['repo']['apt']['components']
+      keyserver node['mongodb3']['package']['repo']['apt']['keyserver']
+      key node['mongodb3']['package']['repo']['apt']['key']
       action :add
     end
     include_recipe 'apt'

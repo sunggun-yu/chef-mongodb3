@@ -11,12 +11,15 @@ provisioner:
 
 platforms:
   - name: ubuntu-12.04
+  - name: debian-7.8
   - name: centos-6.6
-  - name: centos-5.11
   - name: oel-6.6
     driver:
       box: rafacas/oel66-plain
       box_url: https://atlas.hashicorp.com/rafacas/boxes/oel66-plain/versions/1.0.0/providers/virtualbox.box
+  - name: ami-2014.03
+    driver:
+      box_url: http://images.geekandi.com/amazon-linux/vagrant-amazon-linux64-2014.03-public-virtualbox.box
 
 suites:
   - name: default
@@ -39,6 +42,7 @@ suites:
         environment: dev
     excludes:
       - oel-6.6
+      - ami-2014.03
 
   - name: default-305
     driver:
@@ -62,6 +66,7 @@ suites:
         environment: dev
     excludes:
       - oel-6.6
+      - ami-2014.03
 
   - name: replica
     driver:
@@ -83,6 +88,7 @@ suites:
         environment: dev
     excludes:
       - oel-6.6
+      - ami-2014.03
 
   - name: configsvr
     driver:
@@ -104,6 +110,7 @@ suites:
         environment: dev
     excludes:
       - oel-6.6
+      - ami-2014.03
 
   - name: mongos
     driver:
@@ -123,6 +130,8 @@ suites:
     provisioner:
       client_rb:
         environment: dev
+    excludes:
+      - ami-2014.03
 
   - name: wired-tiger
     driver:
@@ -144,6 +153,7 @@ suites:
         environment: dev
     excludes:
       - oel-6.6
+      - ami-2014.03
 
   - name: mms-automation-agent
     driver:
@@ -165,6 +175,7 @@ suites:
         environment: dev
     excludes:
       - oel-6.6
+      - ami-2014.03
 
   - name: mms-monitoring-agent
     driver:
@@ -185,4 +196,27 @@ suites:
       client_rb:
         environment: dev
     excludes:
+      - oel-6.6
+      - ami-2014.03
+
+  - name: ami-default
+    driver:
+      vm_hostname: mongo3
+    run_list:
+      - recipe[mongodb3::default]
+    attributes:
+      mongodb3:
+        version: 3.0.7
+      chef_client:
+        config:
+          force_logger: true
+          log_level: info
+      build-essential:
+        compile_time: false
+    provisioner:
+      client_rb:
+        environment: dev
+    excludes:
+      - ubuntu-12.04
+      - centos-6.6
       - oel-6.6
