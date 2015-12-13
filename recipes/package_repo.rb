@@ -31,7 +31,7 @@ case node['platform_family']
   when 'debian'
     apt_repository 'mongodb' do
       uri node['mongodb3']['package']['repo']['url']
-      distribution "#{node['lsb']['codename']}/mongodb-org/stable"
+      distribution "#{node['lsb']['codename']}/mongodb-org/3.2"
       components node['mongodb3']['package']['repo']['apt']['components']
       keyserver node['mongodb3']['package']['repo']['apt']['keyserver']
       key node['mongodb3']['package']['repo']['apt']['key']
