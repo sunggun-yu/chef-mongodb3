@@ -179,7 +179,11 @@ default['mongodb3']['config']['mongod']['storage']['repairPath'] = nil
 default['mongodb3']['config']['mongod']['storage']['journal']['enabled'] = true
 default['mongodb3']['config']['mongod']['storage']['directoryPerDB'] = nil # default : false
 default['mongodb3']['config']['mongod']['storage']['syncPeriodSecs'] = nil # default : 60
-default['mongodb3']['config']['mongod']['storage']['engine'] = 'mmapv1'
+if node['mongodb3']['version'] == '3.2.0'
+  default['mongodb3']['config']['mongod']['storage']['engine'] = 'wiredTiger' # default since 3.2 : wiredTiger
+else
+  default['mongodb3']['config']['mongod']['storage']['engine'] = 'mmapv1' # default until 3.2 : mmapv1
+end
 
 # storage.mmapv1 Options : http://docs.mongodb.org/manual/reference/configuration-options/#storage-mmapv1-options
 default['mongodb3']['config']['mongod']['storage']['mmapv1']['preallocDataFiles'] = nil # default : true
