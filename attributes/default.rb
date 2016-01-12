@@ -29,6 +29,7 @@ case node['platform_family']
       pkg_version = "#{node['mongodb3']['version']}-1.amzn1" # ~FC019
     end
 end
+pkg_major_version = pkg_version.to_f # eg. 3.0, 3.2
 
 # Setup default package repo url attribute for each platform family or platform
 case node['platform']
@@ -72,11 +73,15 @@ end
 default['mongodb3']['package']['repo']['url'] = pkg_repo
 
 # MongoDB repository name
-default['mongodb3']['package']['repo']['apt']['name'] = 'stable'
+default['mongodb3']['package']['repo']['apt']['name'] = pkg_major_version.to_s
 
 # MongoDB apt keyserver and key
 default['mongodb3']['package']['repo']['apt']['keyserver'] = apt_repo_keyserver
-default['mongodb3']['package']['repo']['apt']['key'] = 'EA312927'
+if pkg_major_version >= 3.2
+  default['mongodb3']['package']['repo']['apt']['key'] = 'EA312927'
+else
+  default['mongodb3']['package']['repo']['apt']['key'] = '7F0CEB10'
+end
 default['mongodb3']['package']['repo']['apt']['components'] = apt_repo_component
 
 # MongoDB package version to install
@@ -182,7 +187,7 @@ default['mongodb3']['config']['mongod']['storage']['repairPath'] = nil
 default['mongodb3']['config']['mongod']['storage']['journal']['enabled'] = true
 default['mongodb3']['config']['mongod']['storage']['directoryPerDB'] = nil # default : false
 default['mongodb3']['config']['mongod']['storage']['syncPeriodSecs'] = nil # default : 60
-if node['mongodb3']['version'] == '3.2.0'
+if pkg_major_version >= 3.2
   default['mongodb3']['config']['mongod']['storage']['engine'] = 'wiredTiger' # default since 3.2 : wiredTiger
 else
   default['mongodb3']['config']['mongod']['storage']['engine'] = 'mmapv1' # default until 3.2 : mmapv1
