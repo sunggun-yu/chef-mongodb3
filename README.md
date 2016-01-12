@@ -13,6 +13,7 @@ Install and configure the MongoDB 3
 NOTICE :
 * Current version 3.0.0 is not supporting mongos 3.0.7 for Oracle Linux 6.6. The package version 3.0.7-1.el6 of mongodb-org-shell package wasn't existing (Test failure).
 * Current version 3.0.0 is not supporting automation and monitoring mms agent installation for Debian 7.8
+* Support MongoDB 3.2.0 version - by [@Cog_g](https://github.com/Cog-g)
 
 ## Supported Platforms
 
@@ -31,7 +32,7 @@ WARNING : Please do not set the user and group attribute on your side. This cook
 
 ```
 # MongoDB version to install
-default['mongodb3']['version'] = '3.0.7'
+default['mongodb3']['version'] = '3.2.0'
 default['mongodb3']['package']['version'] = Actual package version to install. It builds from version attribute.
 
 # Package repository url
@@ -39,7 +40,7 @@ default['mongodb3']['package']['repo']['url'] = Package repository url
 
 # Attribute for apt_repository
 default['mongodb3']['package']['repo']['apt']['keyserver'] = key server url for ubuntu or debian
-default['mongodb3']['package']['repo']['apt']['key'] = '7F0CEB10'
+default['mongodb3']['package']['repo']['apt']['key'] = 'EA312927'
 default['mongodb3']['package']['repo']['apt']['components'] = `multiverse` for ubuntu. `main` for debian
 
 # MongoDB user:group : PLEASE DO NOT SET THE USER AND GROUP ATTRIBUTE

@@ -18,7 +18,7 @@
 #
 
 # MongoDB version to install
-default['mongodb3']['version'] = '3.0.7'
+default['mongodb3']['version'] = '3.2.0'
 
 # Setup default package version attribute to install
 pkg_version = node['mongodb3']['version']
@@ -72,11 +72,11 @@ end
 default['mongodb3']['package']['repo']['url'] = pkg_repo
 
 # MongoDB repository name
-default['mongodb3']['package']['repo']['apt']['name'] = "stable"
+default['mongodb3']['package']['repo']['apt']['name'] = 'stable'
 
 # MongoDB apt keyserver and key
 default['mongodb3']['package']['repo']['apt']['keyserver'] = apt_repo_keyserver
-default['mongodb3']['package']['repo']['apt']['key'] = '7F0CEB10'
+default['mongodb3']['package']['repo']['apt']['key'] = 'EA312927'
 default['mongodb3']['package']['repo']['apt']['components'] = apt_repo_component
 
 # MongoDB package version to install
@@ -182,7 +182,11 @@ default['mongodb3']['config']['mongod']['storage']['repairPath'] = nil
 default['mongodb3']['config']['mongod']['storage']['journal']['enabled'] = true
 default['mongodb3']['config']['mongod']['storage']['directoryPerDB'] = nil # default : false
 default['mongodb3']['config']['mongod']['storage']['syncPeriodSecs'] = nil # default : 60
-default['mongodb3']['config']['mongod']['storage']['engine'] = 'mmapv1'
+if node['mongodb3']['version'] == '3.2.0'
+  default['mongodb3']['config']['mongod']['storage']['engine'] = 'wiredTiger' # default since 3.2 : wiredTiger
+else
+  default['mongodb3']['config']['mongod']['storage']['engine'] = 'mmapv1' # default until 3.2 : mmapv1
+end
 
 # storage.mmapv1 Options : http://docs.mongodb.org/manual/reference/configuration-options/#storage-mmapv1-options
 default['mongodb3']['config']['mongod']['storage']['mmapv1']['preallocDataFiles'] = nil # default : true
