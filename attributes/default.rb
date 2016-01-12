@@ -71,6 +71,9 @@ end
 # MongoDB package repo url
 default['mongodb3']['package']['repo']['url'] = pkg_repo
 
+# MongoDB repository name
+default['mongodb3']['package']['repo']['apt']['name'] = "stable"
+
 # MongoDB apt keyserver and key
 default['mongodb3']['package']['repo']['apt']['keyserver'] = apt_repo_keyserver
 default['mongodb3']['package']['repo']['apt']['key'] = '7F0CEB10'
