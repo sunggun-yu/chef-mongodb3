@@ -53,5 +53,5 @@ end
 
 # Test mongod process starts with expected mongodb config file
 describe command('mongo --eval "db.version()"') do
-  its(:stdout) { should contain('3.0.7') }
+  its(:stdout) { should contain('3.2.0') }
 end

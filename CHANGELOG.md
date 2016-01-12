@@ -1,5 +1,11 @@
 # mongodb3 Cookbook CHANGELOG
 
+## 4.0.0
+Thank you so much for your contribution!
+* Allowed overrides of mongo repo name for debian/ubuntu packages - Dave Augustus([@daugustus](https://github.com/daugustus))
+* Added support for MongoDB 3.2.0 - Constantin Guay([@Cog-g](https://github.com/Cog-g))
+* Support for both MongoDB 3.0.x and 3.2.x - Julien Pervillé([@jperville](https://github.com/jperville))
+
 ## 3.0.0
 * Update the default MongoDB package version to 3.0.7
 * Update README.md #8
