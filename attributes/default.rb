@@ -34,9 +34,9 @@ pkg_major_version = pkg_version.to_f # eg. 3.0, 3.2
 # Setup default package repo url attribute for each platform family or platform
 case node['platform']
   when 'redhat', 'oracle','centos', 'fedora'
-    pkg_repo = "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.0/#{node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i686'}"
+    pkg_repo = "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/#{pkg_major_version}/#{node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i686'}"
   when 'amazon'
-    pkg_repo = 'https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.0/x86_64/'
+    pkg_repo = "https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/#{pkg_major_version}/x86_64/"
   when 'ubuntu'
     pkg_repo = 'http://repo.mongodb.org/apt/ubuntu'
   when 'debian'
