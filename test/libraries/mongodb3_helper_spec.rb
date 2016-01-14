@@ -11,7 +11,7 @@ describe 'Mongodb3Helper' do
   context '#mongodb_config' do
     let(:config) { Chef::Node::ImmutableMash.new('systemLog' => { 'verbosity' => nil, 'path' => '/var/log' }) }
     it 'with an immutable Mash' do
-      expect(subject.mongodb_config(config)).to eq("---\nsystemLog:\n  path: /var/log\n")
+      expect(YAML.load(subject.mongodb_config(config))).to eq('systemLog' => { 'path' => '/var/log' })
     end
   end
 end
