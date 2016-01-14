@@ -1,5 +1,8 @@
 # mongodb3 Cookbook CHANGELOG
 
+## Next
+* Fixed Chef::Mixin::Template::TemplateError: Node attributes are read-only when you do not specify which precedence level to set with Chef 11.10 - Daniel Doubrovkine([@dblock](https://github.com/dblock)) #21.
+
 ## 4.0.0
 Thank you so much for your contribution!
 * Allowed overrides of mongo repo name for debian/ubuntu packages - Dave Augustus([@daugustus](https://github.com/daugustus))
@@ -16,7 +19,7 @@ Thank you so much for your contribution!
 
 NOTICE :
 * Current version 3.0.0 is not supporting mongos 3.0.7 for Oracle Linux 6.6. The package version 3.0.7-1.el6 of mongodb-org-shell package wasn't existing (Test failure).
-* Current version 3.0.0 is not supporting automation and monitoring mms agent installation for Debian 7.8 
+* Current version 3.0.0 is not supporting automation and monitoring mms agent installation for Debian 7.8
 
 ## 2.0.0
 
@@ -24,7 +27,7 @@ WARNING : `mms-agent` recipe has been deprecated at this version.
 
 * Removing `mongodb-org` package installation : `mongodb-org` package installs latest version of mongodb modules such as `mongodb-org-server`. so that installing lower version of mongodb-org-server has been failed.
 * Removing `mms-agent` recipe and divide it as `mms-automation-agent` and `mms-monitoring-agent` recipe
-* PR #3 : Bump up the runit dependency version to 1.7.0. Thank you for your contribution @dherges 
+* PR #3 : Bump up the runit dependency version to 1.7.0. Thank you for your contribution @dherges
 
 
 ## 1.0.0
