@@ -9,7 +9,7 @@ describe 'Mongodb3Helper' do
     end
   end
   context '#mongodb_config' do
-    let(:config) { Chef::Node::ImmutableMash.new('systemLog' => { 'verbosity' => nil, 'path' => '/var/log' }) }
+    let(:config) { Chef::Node::ImmutableMash.new('systemLog' => { 'verbosity' => nil, 'path' => '/var/log', 'empty' => { 'foo' => nil } }) }
     it 'with an immutable Mash' do
       expect(YAML.load(subject.mongodb_config(config))).to eq('systemLog' => { 'path' => '/var/log' })
     end
