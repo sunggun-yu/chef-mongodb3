@@ -12,3 +12,4 @@ before_script:
   - bundle exec berks
 script:
   - bundle exec foodcritic .
+  - bundle exec rspec test/libraries

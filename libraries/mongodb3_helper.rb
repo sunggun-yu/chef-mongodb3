@@ -1,14 +1,19 @@
-
 module Mongodb3Helper
   def mongodb_config(config)
-    config_hash = config.to_hash
-    config_hash.compact
-    JSON.parse(config_hash.dup.to_json).to_yaml
+    config.to_hash.compact.to_yaml
   end
 end
 
 class Hash
   def compact
-    delete_if {|k,v| v.is_a?(Hash) ? v.compact.empty? : v.nil? }
+    inject({}) do |new_hash, (k, v)|
+      if v.is_a?(Hash)
+        v = v.compact
+        new_hash[k] = v unless v.empty?
+      else
+        new_hash[k] = v unless v.nil?
+      end
+      new_hash
+    end
   end
 end
