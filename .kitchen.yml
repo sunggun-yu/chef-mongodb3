@@ -176,6 +176,18 @@ suites:
       - ami-2014.03
       - debian-7.8
 
+  - name: mms-automation-agent-with-databag
+    driver:
+      vm_hostname: mms-automation-agent
+    encrypted_data_bag_secret_key_path: "test/data_bags/encrypted_data_bag_secret"
+    run_list:
+      - recipe[mongodb3-test::mms_automation_agent_with_data_bag]
+    provisioner:
+      client_rb:
+        environment: dev
+    includes:
+      - ubuntu-12.04
+
   - name: mms-monitoring-agent
     driver:
       vm_hostname: mms-monitoring-agent
