@@ -29,6 +29,7 @@ platforms:
       apt:
         compile_time_update: true
   - name: centos-6.6
+  - name: centos-7.2
   - name: oel-6.6
     driver:
       box: rafacas/oel66-plain
@@ -225,9 +226,5 @@ suites:
     provisioner:
       client_rb:
         environment: dev
-    excludes:
-      - ubuntu-12.04
-      - ubuntu-14.04
-      - centos-6.6
-      - oel-6.6
-      - debian-7.8
+    includes:
+      - ami-2014.03
