@@ -17,6 +17,72 @@
 # limitations under the License.
 #
 
+pkg_major_version = node['mongodb3']['version'].to_f # eg. 3.0, 3.2
+
+# Setup default package version attribute to install
+pkg_version = node['mongodb3']['version']
+case node['platform_family']
+  when 'rhel', 'fedora'
+    pkg_version =  "#{node['mongodb3']['version']}-1.el#{node.platform_version.to_i}" # ~FC019
+    if node['platform'] == 'amazon'
+      pkg_version = "#{node['mongodb3']['version']}-1.amzn1" # ~FC019
+    end
+end
+
+# Setup default package repo url attribute for each platform family or platform
+case node['platform']
+  when 'redhat', 'oracle','centos', 'fedora'
+    pkg_repo = "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/#{pkg_major_version}/#{node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i686'}"
+  when 'amazon'
+    pkg_repo = "https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/#{pkg_major_version}/x86_64/"
+  when 'ubuntu'
+    pkg_repo = 'http://repo.mongodb.org/apt/ubuntu'
+  when 'debian'
+    pkg_repo = 'http://repo.mongodb.org/apt/debian'
+end
+
+# Setup apt variables
+case node['platform']
+  when 'ubuntu'
+    apt_repo_keyserver = 'hkp://keyserver.ubuntu.com:80'
+    apt_repo_component = ['multiverse']
+  when 'debian'
+    apt_repo_keyserver = 'keyserver.ubuntu.com'
+    apt_repo_component = ['main']
+end
+
+# MongoDB package version to install
+if node['mongodb3']['package']['version'].nil?
+  node.set['mongodb3']['package']['version'] = pkg_version
+end
+
+# MongoDB package repo url
+if node['mongodb3']['package']['repo']['url'].nil?
+  node.set['mongodb3']['package']['repo']['url'] = pkg_repo
+end
+
+# MongoDB repository name
+if node['mongodb3']['package']['repo']['apt']['name'].nil?
+  node.set['mongodb3']['package']['repo']['apt']['name'] = pkg_major_version.to_s
+end
+
+# MongoDB apt keyserver and key
+if node['mongodb3']['package']['repo']['apt']['keyserver'].nil?
+  node.set['mongodb3']['package']['repo']['apt']['keyserver'] = apt_repo_keyserver
+end
+
+if node['mongodb3']['package']['repo']['apt']['key'].nil?
+  if pkg_major_version >= 3.2
+    node.set['mongodb3']['package']['repo']['apt']['key'] = 'EA312927'
+  else
+    node.set['mongodb3']['package']['repo']['apt']['key'] = '7F0CEB10'
+  end
+end
+
+if node['mongodb3']['package']['repo']['apt']['components'].nil?
+  node.set['mongodb3']['package']['repo']['apt']['components'] = apt_repo_component
+end
+
 # Add the MongoDB 3.0 Package repository
 case node['platform_family']
   when 'rhel', 'fedora'
