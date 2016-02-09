@@ -133,7 +133,6 @@ suites:
       client_rb:
         environment: dev
     excludes:
-      - oel-6.6
       - ami-2014.03
 
   - name: wired-tiger
@@ -143,7 +142,7 @@ suites:
       - role[wired_tiger]
     attributes:
       mongodb3:
-        version: '3.0.8'
+        version: '3.0.9'
       chef_client:
         config:
           force_logger: true

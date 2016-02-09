@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/sunggun-yu/chef-mongodb3.svg?branch=master)](https://travis-ci.org/sunggun-yu/chef-mongodb3)
 
-Install and configure the MongoDB 3
+## Install and configure the MongoDB 3
 
 * Install and configure the mongod (or configure the config server for shard cluster)
 * Install and configure the mongos
@@ -10,12 +10,13 @@ Install and configure the MongoDB 3
 * Install the MMS Automation Agent
 * Install the MMS Monitoring Agent
 
-NOTICE :
-* Current version 4.0.0 is not supporting mongos 3.0.7 for Oracle Linux 6.6. The package version 3.0.7-1.el6 of mongodb-org-shell package wasn't existing (Test failure).
-* Current version 4.0.0 is not supporting automation and monitoring mms agent installation for Debian 7.8
+### NOTICE :
+
+* Current version 5.0.0 is not supporting automation and monitoring mms agent installation for Debian 7.8
 * MongoDB 3.2.0 is default version of mongodb3 cookbook - by [@Cog_g](https://github.com/Cog-g)
 
-Contributors
+### Contributors
+
 * David Herges - [@dherges](https://github.com/dherges)
 * Joe Passavanti - [@gottaloveit](https://github.com/gottaloveit)
 * MEGA MOnolithic meTHod - [@megamoth](https://github.com/megamoth)
@@ -25,9 +26,11 @@ Contributors
 
 ## Supported Platforms
 
+The following platforms have been tested with Test Kitchen
+
 * Ubuntu 12.04, 14.04
 * Debian 7.8
-* CentOS 6.6
+* CentOS 6.6, 7.2
 * Oralce 6.6
 * Amazon Linux
 
