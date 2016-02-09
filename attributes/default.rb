@@ -20,17 +20,22 @@
 # MongoDB version to install
 default['mongodb3']['version'] = '3.2.0'
 
+# Please note : The default values for ['mongodb3']['package'] attributes will be set in `package_repo` recipe.
+#  but, if you want to use custom values for yum/apt repo url, yum package version or apt related, please set the value in your wrapper.
+
 # MongoDB package version to install : eg. 3.0.8, 3.2.1, 3.2.1-1.el6 or 3.2.1-1.amzn1
 node.set['mongodb3']['package']['version'] = nil
 
 # MongoDB package repo url
+# eg. ubuntu : 'http://repo.mongodb.org/apt/ubuntu'
+# eg. centos : 'https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.2/x86_64/'
 node.set['mongodb3']['package']['repo']['url'] = nil
 
 # MongoDB repository info for apt
-node.set['mongodb3']['package']['repo']['apt']['name'] = nil
-node.set['mongodb3']['package']['repo']['apt']['keyserver'] = nil
-node.set['mongodb3']['package']['repo']['apt']['key'] = nil
-node.set['mongodb3']['package']['repo']['apt']['components'] = nil
+node.set['mongodb3']['package']['repo']['apt']['name'] = nil  # eg. 3.0, 3.2
+node.set['mongodb3']['package']['repo']['apt']['keyserver'] = nil # eg. hkp://keyserver.ubuntu.com:80
+node.set['mongodb3']['package']['repo']['apt']['key'] = nil # eg. 3.2 : 'EA312927', 3.0 : '7F0CEB10'
+node.set['mongodb3']['package']['repo']['apt']['components'] = nil # eg. ['multiverse']
 
 # Default attribute for MongoDB installation
 case node['platform_family']
@@ -154,12 +159,6 @@ default['mongodb3']['config']['mongod']['storage']['journal']['enabled'] = true
 default['mongodb3']['config']['mongod']['storage']['directoryPerDB'] = nil # default : false
 default['mongodb3']['config']['mongod']['storage']['syncPeriodSecs'] = nil # default : 60
 default['mongodb3']['config']['mongod']['storage']['engine'] = nil # default -  since 3.2 : wiredTiger, until 3.2 : mmapv1
-
-# if pkg_major_version >= 3.2
-#   default['mongodb3']['config']['mongod']['storage']['engine'] = 'wiredTiger' # default since 3.2 : wiredTiger
-# else
-#   default['mongodb3']['config']['mongod']['storage']['engine'] = 'mmapv1' # default until 3.2 : mmapv1
-# end
 
 # storage.mmapv1 Options : http://docs.mongodb.org/manual/reference/configuration-options/#storage-mmapv1-options
 default['mongodb3']['config']['mongod']['storage']['mmapv1']['preallocDataFiles'] = nil # default : true
