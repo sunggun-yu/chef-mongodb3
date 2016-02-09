@@ -13,7 +13,7 @@
 ### NOTICE :
 
 * Current version 5.0.0 is not supporting automation and monitoring mms agent installation for Debian 7.8
-* MongoDB 3.2.0 is default version of mongodb3 cookbook - by [@Cog_g](https://github.com/Cog-g)
+* MongoDB 3.2.1 is default version of mongodb3 cookbook
 
 ### Contributors
 
