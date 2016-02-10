@@ -31,7 +31,7 @@ end
 
 # Setup default package repo url attribute for each platform family or platform
 case node['platform']
-  when 'redhat', 'oracle','centos', 'fedora'
+  when 'redhat', 'oracle','centos', 'fedora' # ~FC024
     pkg_repo = "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/#{pkg_major_version}/#{node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i686'}"
   when 'amazon'
     pkg_repo = "https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/#{pkg_major_version}/x86_64/"

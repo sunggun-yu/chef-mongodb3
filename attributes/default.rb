@@ -44,7 +44,7 @@ case node['platform_family']
     mongo_group = 'mongod'
     mongo_dbpath = '/var/lib/mongo'
     # To guarantee the compatibility for centos 6 in previous version of mongodb3 cookbook
-    if node.platform_version.to_i >= 7
+    if node['platform_version'].to_i >= 7
       mongo_pid_file = '/var/run/mongodb/mongod.pid'
     else
       mongo_pid_file = '/var/run/mongodb/mongodb.pid'
