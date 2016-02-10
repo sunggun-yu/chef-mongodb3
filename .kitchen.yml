@@ -11,8 +11,25 @@ provisioner:
 
 platforms:
   - name: ubuntu-12.04
+    run_list:
+    - recipe[apt]
+    attributes:
+      apt:
+        compile_time_update: true
+  - name: ubuntu-14.04
+    run_list:
+    - recipe[apt]
+    attributes:
+      apt:
+        compile_time_update: true
   - name: debian-7.8
+    run_list:
+    - recipe[apt]
+    attributes:
+      apt:
+        compile_time_update: true
   - name: centos-6.6
+  - name: centos-7.2
   - name: oel-6.6
     driver:
       box: rafacas/oel66-plain
@@ -26,7 +43,6 @@ suites:
     driver:
       vm_hostname: mongo3
     run_list:
-      - recipe[apt]
       - recipe[mongodb3::default]
     attributes:
       chef_client:
@@ -35,8 +51,6 @@ suites:
           log_level: info
       build-essential:
         compile_time: false
-      apt:
-        compile_time_update: true
     provisioner:
       client_rb:
         environment: dev
@@ -44,26 +58,23 @@ suites:
       - oel-6.6
       - ami-2014.03
 
-  - name: default-305
+  - name: chef-client-11
     driver:
       vm_hostname: mongo3
+    driver_config:
+      require_chef_omnibus: 11.18.12
     run_list:
-      - recipe[apt]
       - recipe[mongodb3::default]
+    excludes:
+      - debian-7.8
+      - oel-6.6
+      - ami-2014.03
+      - ubuntu-14.04
+
+  - name: default-30x
+    run_list:
+      - recipe[mongodb3-test::default-30x]
     attributes:
-      mongodb3:
-        version: 3.0.5
-      chef_client:
-        config:
-          force_logger: true
-          log_level: info
-      build-essential:
-        compile_time: false
-      apt:
-        compile_time_update: true
-    provisioner:
-      client_rb:
-        environment: dev
     excludes:
       - oel-6.6
       - ami-2014.03
@@ -72,7 +83,6 @@ suites:
     driver:
       vm_hostname: replica
     run_list:
-      - recipe[apt]
       - role[replset]
     attributes:
       chef_client:
@@ -81,8 +91,6 @@ suites:
           log_level: info
       build-essential:
         compile_time: false
-      apt:
-        compile_time_update: true
     provisioner:
       client_rb:
         environment: dev
@@ -94,7 +102,6 @@ suites:
     driver:
       vm_hostname: configsvr
     run_list:
-      - recipe[apt]
       - role[configsvr]
     attributes:
       chef_client:
@@ -103,8 +110,6 @@ suites:
           log_level: info
       build-essential:
         compile_time: false
-      apt:
-        compile_time_update: true
     provisioner:
       client_rb:
         environment: dev
@@ -116,7 +121,6 @@ suites:
     driver:
       vm_hostname: mongos
     run_list:
-      - recipe[apt]
       - role[mongos]
     attributes:
       chef_client:
@@ -125,30 +129,26 @@ suites:
           log_level: info
       build-essential:
         compile_time: false
-      apt:
-        compile_time_update: true
     provisioner:
       client_rb:
         environment: dev
     excludes:
-      - oel-6.6
       - ami-2014.03
 
   - name: wired-tiger
     driver:
       vm_hostname: wired-tiger
     run_list:
-      - recipe[apt]
       - role[wired_tiger]
     attributes:
+      mongodb3:
+        version: '3.0.9'
       chef_client:
         config:
           force_logger: true
           log_level: info
       build-essential:
         compile_time: false
-      apt:
-        compile_time_update: true
     provisioner:
       client_rb:
         environment: dev
@@ -160,7 +160,6 @@ suites:
     driver:
       vm_hostname: mms-automation-agent
     run_list:
-      - recipe[apt]
       - role[mms_automation_agent]
     attributes:
       chef_client:
@@ -169,8 +168,6 @@ suites:
           log_level: info
       build-essential:
         compile_time: false
-      apt:
-        compile_time_update: true
     provisioner:
       client_rb:
         environment: dev
@@ -178,12 +175,24 @@ suites:
       - oel-6.6
       - ami-2014.03
       - debian-7.8
+      - centos-7.2
+
+  - name: mms-automation-agent-with-databag
+    driver:
+      vm_hostname: mms-automation-agent
+    encrypted_data_bag_secret_key_path: "test/data_bags/encrypted_data_bag_secret"
+    run_list:
+      - recipe[mongodb3-test::mms_automation_agent_with_data_bag]
+    provisioner:
+      client_rb:
+        environment: dev
+    includes:
+      - ubuntu-12.04
 
   - name: mms-monitoring-agent
     driver:
       vm_hostname: mms-monitoring-agent
     run_list:
-      - recipe[apt]
       - role[mms_monitoring_agent]
     attributes:
       chef_client:
@@ -192,8 +201,6 @@ suites:
           log_level: info
       build-essential:
         compile_time: false
-      apt:
-        compile_time_update: true
     provisioner:
       client_rb:
         environment: dev
@@ -201,6 +208,7 @@ suites:
       - oel-6.6
       - ami-2014.03
       - debian-7.8
+      - centos-7.2
 
   - name: ami-default
     driver:
@@ -219,8 +227,5 @@ suites:
     provisioner:
       client_rb:
         environment: dev
-    excludes:
-      - ubuntu-12.04
-      - centos-6.6
-      - oel-6.6
-      - debian-7.8
+    includes:
+      - ami-2014.03

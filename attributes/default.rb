@@ -18,40 +18,24 @@
 #
 
 # MongoDB version to install
-default['mongodb3']['version'] = '3.2.0'
+default['mongodb3']['version'] = '3.2.1'
 
-# Setup default package version attribute to install
-pkg_version = node['mongodb3']['version']
-case node['platform_family']
-  when 'rhel', 'fedora'
-    pkg_version =  "#{node['mongodb3']['version']}-1.el#{node.platform_version.to_i}" # ~FC019
-    if node['platform'] == 'amazon'
-      pkg_version = "#{node['mongodb3']['version']}-1.amzn1" # ~FC019
-    end
-end
-pkg_major_version = pkg_version.to_f # eg. 3.0, 3.2
+# Please note : The default values for ['mongodb3']['package'] attributes will be set in `package_repo` recipe.
+# but, You can set custom values for yum/apt repo url, yum package version or apt related in your wrapper
 
-# Setup default package repo url attribute for each platform family or platform
-case node['platform']
-  when 'redhat', 'oracle','centos', 'fedora'
-    pkg_repo = "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/#{pkg_major_version}/#{node['kernel']['machine'] =~ /x86_64/ ? 'x86_64' : 'i686'}"
-  when 'amazon'
-    pkg_repo = "https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/#{pkg_major_version}/x86_64/"
-  when 'ubuntu'
-    pkg_repo = 'http://repo.mongodb.org/apt/ubuntu'
-  when 'debian'
-    pkg_repo = 'http://repo.mongodb.org/apt/debian'
-end
+# MongoDB package version to install : eg. 3.0.8, 3.2.1, 3.2.1-1.el6 or 3.2.1-1.amzn1
+default['mongodb3']['package']['version'] = nil
 
-# Setup apt variables
-case node['platform']
-  when 'ubuntu'
-    apt_repo_keyserver = 'hkp://keyserver.ubuntu.com:80'
-    apt_repo_component = ['multiverse']
-  when 'debian'
-    apt_repo_keyserver = 'keyserver.ubuntu.com'
-    apt_repo_component = ['main']
-end
+# MongoDB package repo url
+# eg. ubuntu : 'http://repo.mongodb.org/apt/ubuntu'
+# eg. centos : 'https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.2/x86_64/'
+default['mongodb3']['package']['repo']['url'] = nil
+
+# MongoDB repository info for apt
+default['mongodb3']['package']['repo']['apt']['name'] = nil  # eg. 3.0, 3.2
+default['mongodb3']['package']['repo']['apt']['keyserver'] = nil # eg. hkp://keyserver.ubuntu.com:80
+default['mongodb3']['package']['repo']['apt']['key'] = nil # eg. 3.2 : 'EA312927', 3.0 : '7F0CEB10'
+default['mongodb3']['package']['repo']['apt']['components'] = nil # eg. ['multiverse']
 
 # Default attribute for MongoDB installation
 case node['platform_family']
@@ -59,7 +43,12 @@ case node['platform_family']
     mongo_user = 'mongod'
     mongo_group = 'mongod'
     mongo_dbpath = '/var/lib/mongo'
-    mongo_pid_file = '/var/run/mongodb/mongodb.pid'
+    # To guarantee the compatibility for centos 6 in previous version of mongodb3 cookbook
+    if node['platform_version'].to_i >= 7
+      mongo_pid_file = '/var/run/mongodb/mongod.pid'
+    else
+      mongo_pid_file = '/var/run/mongodb/mongodb.pid'
+    end
     config_processManagement_fork = true
   when 'debian'
     mongo_user = 'mongodb'
@@ -68,24 +57,6 @@ case node['platform_family']
     mongo_pid_file = nil
     config_processManagement_fork = nil
 end
-
-# MongoDB package repo url
-default['mongodb3']['package']['repo']['url'] = pkg_repo
-
-# MongoDB repository name
-default['mongodb3']['package']['repo']['apt']['name'] = pkg_major_version.to_s
-
-# MongoDB apt keyserver and key
-default['mongodb3']['package']['repo']['apt']['keyserver'] = apt_repo_keyserver
-if pkg_major_version >= 3.2
-  default['mongodb3']['package']['repo']['apt']['key'] = 'EA312927'
-else
-  default['mongodb3']['package']['repo']['apt']['key'] = '7F0CEB10'
-end
-default['mongodb3']['package']['repo']['apt']['components'] = apt_repo_component
-
-# MongoDB package version to install
-default['mongodb3']['package']['version'] = pkg_version
 
 # MongoDB user:group
 default['mongodb3']['user'] = mongo_user
@@ -187,11 +158,7 @@ default['mongodb3']['config']['mongod']['storage']['repairPath'] = nil
 default['mongodb3']['config']['mongod']['storage']['journal']['enabled'] = true
 default['mongodb3']['config']['mongod']['storage']['directoryPerDB'] = nil # default : false
 default['mongodb3']['config']['mongod']['storage']['syncPeriodSecs'] = nil # default : 60
-if pkg_major_version >= 3.2
-  default['mongodb3']['config']['mongod']['storage']['engine'] = 'wiredTiger' # default since 3.2 : wiredTiger
-else
-  default['mongodb3']['config']['mongod']['storage']['engine'] = 'mmapv1' # default until 3.2 : mmapv1
-end
+default['mongodb3']['config']['mongod']['storage']['engine'] = nil # default -  since 3.2 : wiredTiger, until 3.2 : mmapv1
 
 # storage.mmapv1 Options : http://docs.mongodb.org/manual/reference/configuration-options/#storage-mmapv1-options
 default['mongodb3']['config']['mongod']['storage']['mmapv1']['preallocDataFiles'] = nil # default : true

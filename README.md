@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/sunggun-yu/chef-mongodb3.svg?branch=master)](https://travis-ci.org/sunggun-yu/chef-mongodb3)
 
-Install and configure the MongoDB 3
+## Install and configure the MongoDB 3
 
 * Install and configure the mongod (or configure the config server for shard cluster)
 * Install and configure the mongos
@@ -10,24 +10,28 @@ Install and configure the MongoDB 3
 * Install the MMS Automation Agent
 * Install the MMS Monitoring Agent
 
-NOTICE :
-* Current version 4.0.0 is not supporting mongos 3.0.7 for Oracle Linux 6.6. The package version 3.0.7-1.el6 of mongodb-org-shell package wasn't existing (Test failure).
-* Current version 4.0.0 is not supporting automation and monitoring mms agent installation for Debian 7.8
-* MongoDB 3.2.0 is default version of mongodb3 cookbook - by [@Cog_g](https://github.com/Cog-g)
+### NOTICE :
 
-Contributors
+* Current version 5.0.0 is not supporting automation and monitoring mms agent installation for Debian 7.8
+* MongoDB 3.2.1 is default version of mongodb3 cookbook
+
+### Contributors
+
 * David Herges - [@dherges](https://github.com/dherges)
 * Joe Passavanti - [@gottaloveit](https://github.com/gottaloveit)
 * MEGA MOnolithic meTHod - [@megamoth](https://github.com/megamoth)
 * Dave Augustus - [@daugustus](https://github.com/daugustus)
 * Constantin Guay - [@Cog-g](https://github.com/Cog-g)
 * Julien Pervillé - [@jperville](https://github.com/jperville)
+* Daniel Doubrov - [@dblock](https://github.com/dblock)
 
 ## Supported Platforms
 
+The following platforms have been tested with Test Kitchen
+
 * Ubuntu 12.04, 14.04
 * Debian 7.8
-* CentOS 6.6
+* CentOS 6.6, 7.2
 * Oralce 6.6
 * Amazon Linux
 
@@ -40,16 +44,17 @@ WARNING : Please do not set the user and group attribute on your side. This cook
 
 ```
 # MongoDB version to install
-default['mongodb3']['version'] = '3.2.0'
+default['mongodb3']['version'] = '3.2.1'
 default['mongodb3']['package']['version'] = Actual package version to install. It builds from version attribute.
 
 # Package repository url
 default['mongodb3']['package']['repo']['url'] = Package repository url
 
 # Attribute for apt_repository
-default['mongodb3']['package']['repo']['apt']['keyserver'] = key server url for ubuntu or debian
-default['mongodb3']['package']['repo']['apt']['key'] = 'EA312927'
-default['mongodb3']['package']['repo']['apt']['components'] = `multiverse` for ubuntu. `main` for debian
+default['mongodb3']['package']['repo']['apt']['name'] = nil  # eg. 3.0, 3.2
+default['mongodb3']['package']['repo']['apt']['keyserver'] = nil # eg. hkp://keyserver.ubuntu.com:80
+default['mongodb3']['package']['repo']['apt']['key'] = nil # eg. 3.2 : 'EA312927', 3.0 : '7F0CEB10'
+default['mongodb3']['package']['repo']['apt']['components'] = nil # `multiverse` for ubuntu. `main` for debian
 
 # MongoDB user:group : PLEASE DO NOT SET THE USER AND GROUP ATTRIBUTE
 default['mongodb3']['user'] = 'mongod' | 'mongodb'

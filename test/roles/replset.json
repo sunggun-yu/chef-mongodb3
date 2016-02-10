@@ -8,8 +8,12 @@
         "mongod" : {
           "replication" : {
             "replSetName" : "replset-1"
+          },
+          "security" : {
+            "keyFile" : "/srv/mongodb/mongodb-keyfile"
           }
-        }
+        },
+        "key_file_content" : "Mb5KNEpIVq1PRIZaA4lcV2KCi1BdSGuzhFUCH61tbhmgHk3Shcc8dbvYW1Lv7jC6\nAtrBWKG4Mn8G5fCTW0cEV0RexNhBRCmSUNszduVi00bMYipyisCD3UUu2ukdUqs9\nNRWlEqeAUEJp8nBZ0AnKpFdtYMsL3zKW7KepW9xWccC0DWQnfSmrZ19ppV0DNVRr\nS5zBbLw0pd7OImkovWAQurLdEVYlgXgkL2Sp7aOWIymrKmWe7leZ4+TITR6xXQ3H\nEcLuICxq+nyDOZ/eKblC5GTfcHyMfGRWiqdfuQeTJbWuo9xPCsbVgfz3c4saHphW\nMflwM1wKTFL/h2+dNSQfSDaOD9HZSprjqx0b4bFS5TsHfiJlaEfbZ0Mv9YPWd9Wi\nNnUDz6l6WW9UVIPCsTrCxRphzYjrn1MF2vIINypDbthpR4s97b89UtCxFsk/Rdzi\nN0RCQtf6a4UeeAf6SFZrWS2/PBzSCaaP/ic3fOaF7VAGQOand9fURkijWxiuBORB\nSP4ftXUoqROgjl1h4vz4C5BDERcN/TQtBmVcuhpqlwPFPhWBoCX09jUZRlodb181\nE9fDsISAZxsrmYNsqHtWwe/PioQFcRe55hk8FPC1TB+aHxtThof493Dd1nDzVXbp\nSOfttBB6qnG/XmgPXVNOov1kkmpaHjn8rvGN+SeMfq7XLnkJD24DgmW3037IYv2k\n/T2hNZaBBd875R+pVyzAmBR50yoJgiJjU/natq7VCcqJ4pMl/YjDvB1EFDQ/4sYy\nOnKtRrKmSEzsqarrKY6u1ttmmlF5i9q5vJmDUNVryxJOCZOS4V+Ma4ZPG3kkZ1sb\nPRS6ZUEBCdZW2Bscuxj3TJZDUuMS/dDq7FiGOC/hRm54YLgpwKaNK3Pc0Uw3FI3e\nObDVLKllDS6cKPDSetf3IJ3CBrCwpUtxDtLA5hIESzpBqbs9Kdm2GPO7UmapJ/ZQ\nKLkCs351W7MCmgXPqv0E7qFXcVnQ"
       }
     }
   },

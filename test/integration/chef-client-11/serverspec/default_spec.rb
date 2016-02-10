@@ -53,5 +53,10 @@ end
 
 # Test mongod process starts with expected mongodb config file
 describe command('mongo --eval "db.version()"') do
-  its(:stdout) { should contain('3.0.5') }
+  its(:stdout) { should contain('3.2.1') }
+end
+
+# Test chef client version
+describe command('chef-client --version') do
+  its(:stdout) { should contain('11.18.12') }
 end

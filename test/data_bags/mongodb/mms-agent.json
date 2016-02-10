@@ -1,0 +1,9 @@
+{
+  "id": "mms-agent",
+  "environments": {
+    "encrypted_data": "B2rMHbbtkhNcl+BgF+nA/9ZGhgfa1O+J27NjvD6bDuz46Y9nSjiABK6K/CDq\n3FWignVJfJ9GegwrWyscX2Uk2publKopj8ZTKTew6+RTvy6rTXB9FA5+zy+L\nERRe2K8C2MFlBvZG5FT1kn6T6rTi80Z5mywlscz4w5QnCQAWwvs=\n",
+    "iv": "9HwyIJXUCFqBBS1yiLPN5A==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}
