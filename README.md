@@ -23,6 +23,7 @@
 * Dave Augustus - [@daugustus](https://github.com/daugustus)
 * Constantin Guay - [@Cog-g](https://github.com/Cog-g)
 * Julien Pervillé - [@jperville](https://github.com/jperville)
+* Daniel Doubrov - [@dblock](https://github.com/dblock)
 
 ## Supported Platforms
 
@@ -43,16 +44,17 @@ WARNING : Please do not set the user and group attribute on your side. This cook
 
 ```
 # MongoDB version to install
-default['mongodb3']['version'] = '3.2.0'
+default['mongodb3']['version'] = '3.2.1'
 default['mongodb3']['package']['version'] = Actual package version to install. It builds from version attribute.
 
 # Package repository url
 default['mongodb3']['package']['repo']['url'] = Package repository url
 
 # Attribute for apt_repository
-default['mongodb3']['package']['repo']['apt']['keyserver'] = key server url for ubuntu or debian
-default['mongodb3']['package']['repo']['apt']['key'] = 'EA312927'
-default['mongodb3']['package']['repo']['apt']['components'] = `multiverse` for ubuntu. `main` for debian
+default['mongodb3']['package']['repo']['apt']['name'] = nil  # eg. 3.0, 3.2
+default['mongodb3']['package']['repo']['apt']['keyserver'] = nil # eg. hkp://keyserver.ubuntu.com:80
+default['mongodb3']['package']['repo']['apt']['key'] = nil # eg. 3.2 : 'EA312927', 3.0 : '7F0CEB10'
+default['mongodb3']['package']['repo']['apt']['components'] = nil # `multiverse` for ubuntu. `main` for debian
 
 # MongoDB user:group : PLEASE DO NOT SET THE USER AND GROUP ATTRIBUTE
 default['mongodb3']['user'] = 'mongod' | 'mongodb'
