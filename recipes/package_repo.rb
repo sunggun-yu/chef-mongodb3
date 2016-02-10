@@ -83,10 +83,10 @@ if node['mongodb3']['package']['repo']['apt']['components'].nil?
   node.set['mongodb3']['package']['repo']['apt']['components'] = apt_repo_component
 end
 
-# Add the MongoDB 3.0 Package repository
+# Add the MongoDB Package repository
 case node['platform_family']
   when 'rhel', 'fedora'
-    yum_repository 'mongodb-org-3.0' do
+    yum_repository "mongodb-org-#{pkg_major_version}" do
       description 'MongoDB Repository'
       baseurl node['mongodb3']['package']['repo']['url']
       action :create
@@ -95,7 +95,7 @@ case node['platform_family']
       sslverify false
     end
   when 'debian'
-    apt_repository 'mongodb' do
+    apt_repository "mongodb-org-#{pkg_major_version}" do
       uri node['mongodb3']['package']['repo']['url']
       distribution "#{node['lsb']['codename']}/mongodb-org/#{node['mongodb3']['package']['repo']['apt']['name']}"
       components node['mongodb3']['package']['repo']['apt']['components']
