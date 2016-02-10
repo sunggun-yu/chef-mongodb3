@@ -210,20 +210,20 @@ suites:
       - debian-7.8
       - centos-7.2
 
-  - name: ami-default
+  - name: amazon
     driver:
       vm_hostname: mongo3
     run_list:
-      - recipe[mongodb3::default]
+      - recipe[mongodb3-test::amazon]
     attributes:
       mongodb3:
-        version: 3.2.0
+        version: 3.2.1
       chef_client:
         config:
           force_logger: true
           log_level: info
       build-essential:
-        compile_time: false
+        compile_time: true
     provisioner:
       client_rb:
         environment: dev
