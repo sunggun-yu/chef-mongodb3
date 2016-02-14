@@ -70,6 +70,12 @@ end
 
 # Start the mongod service
 service 'mongod' do
+  case node['platform']
+    when 'ubuntu'
+      if node['platform_version'].to_f >= 14.04
+        provider Chef::Provider::Service::Upstart
+      end
+  end
   supports :start => true, :stop => true, :restart => true, :status => true
   action :enable
   subscribes :restart, "template[#{node['mongodb3']['mongod']['config_file']}]", :delayed
