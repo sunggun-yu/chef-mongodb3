@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: mongodb3-test
-# Recipe:: 30x
+# Recipe:: default-30x
 #
 # Copyright 2016, Sunggun Yu
 #
