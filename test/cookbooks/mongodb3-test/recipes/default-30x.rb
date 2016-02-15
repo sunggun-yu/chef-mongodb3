@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: mongodb3-test
-# Recipe:: default-30x
+# Recipe:: 30x
 #
 # Copyright 2016, Sunggun Yu
 #
@@ -16,5 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+node.set['mongodb3']['version'] = '3.0.9'
 
 include_recipe 'mongodb3::default'

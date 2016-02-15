@@ -58,6 +58,23 @@ suites:
       - oel-6.6
       - ami-2014.03
 
+  - name: custom
+    run_list:
+      - recipe[mongodb3-test::custom]
+    attributes:
+      chef_client:
+        config:
+          force_logger: true
+          log_level: info
+      build-essential:
+        compile_time: false
+    provisioner:
+      client_rb:
+        environment: dev
+    includes:
+      - ubuntu-14.04
+      - centos-7.2
+
   - name: chef-client-11
     driver:
       vm_hostname: mongo3
