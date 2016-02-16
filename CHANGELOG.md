@@ -1,5 +1,10 @@
 # mongodb3 Cookbook CHANGELOG
 
+## 5.1.0
+
+* Feature request #31 : Creating sysLog directory for mongod 
+* Fixing #30 : Changing service provider as `Chef::Provider::Service::Upstart` for ubuntu 14.04
+
 ## 5.0.0
 
 * Fixed Chef::Mixin::Template::TemplateError: Node attributes are read-only when you do not specify which precedence level to set with Chef 11.10 - Daniel Doubrovkine([@dblock](https://github.com/dblock)) #21.
