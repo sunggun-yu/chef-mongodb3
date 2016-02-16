@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: mongodb3-test
-# Recipe:: default-30x
+# Recipe:: amazon
 #
 # Copyright 2016, Sunggun Yu
 #
@@ -17,6 +17,6 @@
 # limitations under the License.
 #
 
-node.set['mongodb3']['version'] = '3.0.9'
-
-include_recipe 'mongodb3::default'
+file '/etc/redhat-release' do
+  content 'Amazon Linux AMI'
+end

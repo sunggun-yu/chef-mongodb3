@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: mongodb3-test
-# Attribute:: default-30x
+# Recipe:: custom
 #
 # Copyright 2016, Sunggun Yu
 #
@@ -17,4 +17,7 @@
 # limitations under the License.
 #
 
-default['mongodb3']['version'] = '3.0.9'
+node.set['mongodb3']['config']['mongod']['storage']['dbPath'] = '/var/lib/mongodb/custom'
+node.set['mongodb3']['config']['mongod']['systemLog']['path'] = '/var/log/mongodb/custom/mongod.log'
+
+include_recipe 'mongodb3::default'
