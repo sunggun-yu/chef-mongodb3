@@ -213,10 +213,30 @@ default['mongodb3']['config']['mongos']['sharding']['autoSplit'] = true # defaul
 default['mongodb3']['config']['mongos']['sharding']['configDB'] = nil
 default['mongodb3']['config']['mongos']['sharding']['chunkSize'] = 64 # default : 64
 
-# MMS automation agent config attribute
-default['mongodb3']['config']['mms']['mmsGroupId'] = nil
+# MMS automation and monitoring agent config attributes
+## common attributes for both automation and monitoring agent
 default['mongodb3']['config']['mms']['mmsApiKey'] = nil
+default['mongodb3']['config']['mms']['mmsBaseUrl'] = 'https://api-agents.mongodb.com'
+default['mongodb3']['config']['mms']['httpProxy'] = nil
+default['mongodb3']['config']['mms']['krb5ConfigLocation'] = nil
+default['mongodb3']['config']['mms']['sslTrustedMMSServerCertificate'] = nil
+default['mongodb3']['config']['mms']['sslRequireValidMMSServerCertificates'] = nil
+
+## Attributes for automation agent
+default['mongodb3']['config']['mms']['mmsGroupId'] = nil
+default['mongodb3']['config']['mms']['logFile'] = '/var/log/mongodb-mms-automation/automation-agent.log'
+default['mongodb3']['config']['mms']['mmsConfigBackup'] = '/var/lib/mongodb-mms-automation/mms-cluster-config-backup.json'
 default['mongodb3']['config']['mms']['logLevel'] = 'INFO'
 default['mongodb3']['config']['mms']['maxLogFiles'] = 10
 default['mongodb3']['config']['mms']['maxLogFileSize'] = 268435456
-default['mongodb3']['config']['mms']['httpProxy'] = nil
+
+## Attributes for monitoring agent
+default['mongodb3']['config']['mms']['useSslForAllConnections'] = nil
+default['mongodb3']['config']['mms']['sslClientCertificate'] = nil
+default['mongodb3']['config']['mms']['sslClientCertificatePassword'] = nil
+default['mongodb3']['config']['mms']['sslTrustedServerCertificates'] = nil
+default['mongodb3']['config']['mms']['sslRequireValidServerCertificates'] = nil
+default['mongodb3']['config']['mms']['krb5Principal'] = nil
+default['mongodb3']['config']['mms']['krb5Keytab'] = nil
+default['mongodb3']['config']['mms']['gsappiServiceName'] = nil
+default['mongodb3']['config']['mms']['enableMunin'] = nil

@@ -15,17 +15,17 @@ mmsApiKey=<%= @config['mmsApiKey'] %>
 #
 # Base url of the MMS web server.
 #
-mmsBaseUrl=https://api-agents.mongodb.com
+mmsBaseUrl=<%= @config['mmsBaseUrl'] %>
 
 #
 # Path to log file
 #
-logFile=/var/log/mongodb-mms-automation/automation-agent.log
+logFile=<%= @config['logFile'] %>
 
 #
 # Path to backup cluster config to
 #
-mmsConfigBackup=/var/lib/mongodb-mms-automation/mms-cluster-config-backup.json
+mmsConfigBackup=<%= @config['mmsConfigBackup'] %>
 
 #
 # Lowest log level to log.  Can be (in order): DEBUG, ROUTINE, INFO, WARN, ERROR, DOOM
@@ -50,5 +50,33 @@ maxLogFileSize=<%= @config['maxLogFileSize'] %>
 <% else %>
 httpProxy=<%= @config['httpProxy'] %>
 <% end %>
+
+#
+# The absolute path to an non-system-standard location for the Kerberos configuration file
+#
+<% if @config['krb5ConfigLocation'].to_s.empty? %>
+#krb5ConfigLocation=
+<% else %>
+krb5ConfigLocation=<%= @config['krb5ConfigLocation'] %>
+<% end %>
+
+#
+# The path on disk that contains the trusted certificate authority certificates in PEM format.
+#
+<% if @config['sslTrustedMMSServerCertificate'].to_s.empty? %>
+#sslTrustedMMSServerCertificate=
+<% else %>
+sslTrustedMMSServerCertificate=<%= @config['sslTrustedMMSServerCertificate'] %>
+<% end %>
+
+#
+# Use this option to disable certificate verification by setting this value to false.
+#
+<% if @config['sslTrustedMMSServerCertificate'].to_s.empty? %>
+#sslRequireValidMMSServerCertificates=
+<% else %>
+sslRequireValidMMSServerCertificates=<%= @config['sslRequireValidMMSServerCertificates'] %>
+<% end %>
+
 # For additional optional settings, please see
 # https://docs.cloud.mongodb.com/reference/automation-agent/

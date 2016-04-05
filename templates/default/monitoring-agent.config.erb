@@ -8,7 +8,125 @@ mmsApiKey=<%= @config['mmsApiKey'] %>
 #
 # Hostname of the MMS monitoring web server.
 #
-mmsBaseUrl=https://api-agents.mongodb.com
+mmsBaseUrl=<%= @config['mmsBaseUrl'] %>
+
+#
+# URL to proxy all HTTP requests through
+#
+<% if @config['httpProxy'].to_s.empty? %>
+#httpProxy=
+<% else %>
+httpProxy=<%= @config['httpProxy'] %>
+<% end %>
+
+#
+# Set to true to enable SSL support globally and to use SSL for all MongoDB connections.
+#
+<% if @config['useSslForAllConnections'].to_s.empty? %>
+#useSslForAllConnections=
+<% else %>
+useSslForAllConnections=<%= @config['useSslForAllConnections'] %>
+<% end %>
+
+#
+# The path to the private key, client certificate, and optional intermediate certificates in PEM format
+#
+<% if @config['sslClientCertificate'].to_s.empty? %>
+#sslClientCertificate=
+<% else %>
+sslClientCertificate=<%= @config['sslClientCertificate'] %>
+<% end %>
+
+#
+# The password needed to decrypt the private key in the file specified in sslClientCertificate.
+#
+<% if @config['sslClientCertificatePassword'].to_s.empty? %>
+#sslClientCertificatePassword=
+<% else %>
+sslClientCertificatePassword=<%= @config['sslClientCertificatePassword'] %>
+<% end %>
+
+#
+# The path on disk that contains the trusted certificate authority certificates in PEM format.
+#
+<% if @config['sslTrustedServerCertificates'].to_s.empty? %>
+#sslTrustedServerCertificates=
+<% else %>
+sslTrustedServerCertificates=<%= @config['sslTrustedServerCertificates'] %>
+<% end %>
+
+#
+# Use this option to disable certificate verification by setting this value to false.
+#
+<% if @config['sslRequireValidServerCertificates'].to_s.empty? %>
+#sslRequireValidServerCertificates=
+<% else %>
+sslRequireValidServerCertificates=<%= @config['sslRequireValidServerCertificates'] %>
+<% end %>
+
+#
+# The Kerberos principal used by the agent.
+#
+<% if @config['krb5Principal'].to_s.empty? %>
+#krb5Principal=
+<% else %>
+krb5Principal=<%= @config['krb5Principal'] %>
+<% end %>
+
+#
+# The absolute path to Kerberos principal’s keytab file.
+#
+<% if @config['krb5Keytab'].to_s.empty? %>
+#krb5Keytab=
+<% else %>
+krb5Keytab=<%= @config['krb5Keytab'] %>
+<% end %>
+
+#
+# The absolute path to an non-system-standard location for the Kerberos configuration file.
+#
+<% if @config['krb5ConfigLocation'].to_s.empty? %>
+#krb5ConfigLocation=
+<% else %>
+krb5ConfigLocation=<%= @config['krb5ConfigLocation'] %>
+<% end %>
+
+#
+# The default service name used by MongoDB is mongodb can specify a custom service name with the gssapiServiceName option.
+#
+<% if @config['gsappiServiceName'].to_s.empty? %>
+#gsappiServiceName=
+<% else %>
+gsappiServiceName=<%= @config['gsappiServiceName'] %>
+<% end %>
+
+#
+# By default the Monitoring Agent will use the trusted root CAs installed on the system. If the agent cannot find the trusted root CAs, configure these settings manually.
+#
+<% if @config['sslTrustedMMSServerCertificate'].to_s.empty? %>
+#sslTrustedMMSServerCertificate=
+<% else %>
+sslTrustedMMSServerCertificate=<%= @config['sslTrustedMMSServerCertificate'] %>
+<% end %>
+
+#
+# You can disable certificate verification by setting this value to false.
+#
+<% if @config['sslRequireValidMMSServerCertificates'].to_s.empty? %>
+#sslRequireValidMMSServerCertificates=
+<% else %>
+sslRequireValidMMSServerCertificates=<%= @config['sslRequireValidMMSServerCertificates'] %>
+<% end %>
+
+#
+# Set to false if you do not with the Monitoring Agent to collect hardware statistics via Munin-node.
+#
+<% if @config['enableMunin'].to_s.empty? %>
+#enableMunin=
+<% else %>
+enableMunin=<%= @config['enableMunin'] %>
+<% end %>
+
 
 # For additional optional settings, please see
 # https://docs.cloud.mongodb.com/reference/monitoring-agent/
