@@ -19,4 +19,9 @@
 
 node.set['mongodb3']['version'] = '3.0.9'
 
+# For package upgrade testing : executing converge twice with different version
+# node.set['mongodb3']['version'] = '3.2.4'
+# node.set['mongodb3']['package']['version'] = '3.2.4'
+# node.set['mongodb3']['package']['repo']['apt']['name'] = '3.2'
+
 include_recipe 'mongodb3::default'

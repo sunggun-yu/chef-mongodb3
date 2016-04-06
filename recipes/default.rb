@@ -22,18 +22,14 @@ include_recipe 'mongodb3::package_repo'
 # Install MongoDB package
 install_package = %w(mongodb-org-server mongodb-org-shell mongodb-org-tools)
 
-case node['platform_family']
-    when 'debian'
-      # bypass dpkg errors about pre-existing init or conf file
-      packager_opts = '-o Dpkg::Options::="--force-confold" --force-yes'
-    else
-      packager_opts = ''
-end
-
 install_package.each do |pkg|
   package pkg do
     version node['mongodb3']['package']['version']
-    options packager_opts
+    case node['platform_family']
+      when 'debian'
+        # bypass dpkg errors about pre-existing init or conf file
+        options '-o Dpkg::Options::="--force-confold" --force-yes'
+    end
     action :install
   end
 end
