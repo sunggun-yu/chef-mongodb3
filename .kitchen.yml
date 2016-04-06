@@ -149,6 +149,7 @@ suites:
       client_rb:
         environment: dev
     excludes:
+      - oel-6.6
       - ami-2014.03
 
   - name: wired-tiger

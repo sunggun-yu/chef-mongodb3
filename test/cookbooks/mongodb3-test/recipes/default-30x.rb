@@ -17,7 +17,7 @@
 # limitations under the License.
 #
 
-node.set['mongodb3']['version'] = '3.0.9'
+node.set['mongodb3']['version'] = '3.0.11'
 
 # For package upgrade testing : executing converge twice with different version
 # node.set['mongodb3']['version'] = '3.2.4'
