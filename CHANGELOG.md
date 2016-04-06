@@ -1,5 +1,11 @@
 # mongodb3 Cookbook CHANGELOG
 
+## 5.2.0
+
+* PR #35 : bypass dpkg errors about pre-existing init or conf file. Damien Raude-Morvan([@drazzib](https://github.com/drazzib))
+* Fix #34 : Supporting all the MMS Automation/Monitoring agent configuration options.
+* Updating default version of MongoDB package installation as 3.2.4
+
 ## 5.1.0
 
 * Feature request #31 : Creating sysLog directory for mongod 

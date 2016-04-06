@@ -7,13 +7,13 @@
 * Install and configure the mongod (or configure the config server for shard cluster)
 * Install and configure the mongos
  * Also, mongos configure the mongos service with runit : `service mongos start|stop|restart|status` 
-* Install the MMS Automation Agent
-* Install the MMS Monitoring Agent
+* Install and configure the MMS Automation Agent
+* Install and configure the MMS Monitoring Agent
 
 ### NOTICE :
 
 * Current version is not supporting automation and monitoring mms agent installation for Debian 7.8
-* MongoDB 3.2.1 is default version of mongodb3 cookbook
+* MongoDB 3.2.4 is default version of mongodb3 cookbook
 
 ### Contributors
 
@@ -24,6 +24,8 @@
 * Constantin Guay - [@Cog-g](https://github.com/Cog-g)
 * Julien Pervillé - [@jperville](https://github.com/jperville)
 * Daniel Doubrov - [@dblock](https://github.com/dblock)
+* Damien Raude-Morvan - [@drazzib](https://github.com/drazzib)
+
 
 ## Supported Platforms
 
@@ -314,7 +316,6 @@ default['mongodb3']['config']['mms']['httpProxy'] = nil
 default['mongodb3']['config']['mms']['krb5ConfigLocation'] = nil
 default['mongodb3']['config']['mms']['sslTrustedMMSServerCertificate'] = nil
 default['mongodb3']['config']['mms']['sslRequireValidMMSServerCertificates'] = nil
-
 ```
 
 #### Attributes for automation agent.
