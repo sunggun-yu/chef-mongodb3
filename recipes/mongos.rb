@@ -44,6 +44,7 @@ template node['mongodb3']['mongos']['config_file'] do
       :config => node['mongodb3']['config']['mongos']
   )
   helpers Mongodb3Helper
+  notifies :restart, "runit_service[mongos]"
 end
 
 # Create the log directory
