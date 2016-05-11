@@ -1,0 +1,17 @@
+[Unit]
+Description=High-performance, schema-free document-oriented database
+Documentation=man:mongod(1)
+After=network.target
+
+[Service]
+Type=forking
+User=mongodb
+Group=mongodb
+RuntimeDirectory=mongod
+PIDFile=/var/run/mongod/mongod.pid
+ExecStart=/usr/bin/mongod -f /etc/mongod.conf --pidfilepath /var/run/mongod/mongod.pid --fork
+TimeoutStopSec=5
+KillMode=mixed
+
+[Install]
+WantedBy=multi-user.target
