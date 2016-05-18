@@ -82,6 +82,26 @@ template node['mongodb3']['mongod']['config_file'] do
   helpers Mongodb3Helper
 end
 
+# Disable Transparent Huge Pages (THP)
+# https://docs.mongodb.com/manual/tutorial/transparent-huge-pages/
+cookbook_file '/etc/init.d/disable-transparent-hugepages' do
+  source 'disable-transparent-hugepages'
+  owner 'root'
+  group 'root'
+  mode '0755'
+  action :create
+  only_if {
+    node['mongodb3']['mongod']['disable-transparent-hugepages']
+  }
+end
+
+service 'disable-transparent-hugepages' do
+  action [ :enable, :start ]
+  only_if {
+    node['mongodb3']['mongod']['disable-transparent-hugepages']
+  }
+end
+
 # Start the mongod service
 service 'mongod' do
   case node['platform']

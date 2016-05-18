@@ -52,7 +52,7 @@ describe file('/var/log/mongodb/mongod.log') do
 end
 
 # Test mongod process starts with expected mongodb config file
-describe command('mongo --eval "db.version()"') do
+describe command('export LC_ALL="en_US.UTF-8"; mongo --eval "db.version()"') do
   its(:stdout) { should contain('3.2.4') }
 end
 
