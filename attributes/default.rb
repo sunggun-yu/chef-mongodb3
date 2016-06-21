@@ -62,6 +62,9 @@ end
 default['mongodb3']['user'] = mongo_user
 default['mongodb3']['group'] = mongo_group
 
+# Cookbook for init scripts
+default['mongodb3']['service_template_cookbook'] = 'mongodb3'
+
 # Mongod config file
 default['mongodb3']['mongod']['config_file'] = '/etc/mongod.conf'
 
