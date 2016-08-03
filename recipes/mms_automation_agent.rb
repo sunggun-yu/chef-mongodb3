@@ -66,6 +66,14 @@ template '/etc/mongodb-mms/automation-agent.config' do
   )
 end
 
+# Change ownership of data directory to mongo user
+directory node['mongodb3']['config']['mongod']['storage']['dbPath'] do
+  owner node['mongodb3']['user']
+  group node['mongodb3']['group']
+  recursive true
+  action :create
+end
+
 # Start the mms automation agent
 service 'mongodb-mms-automation-agent' do
   # The service provider of MMS Agent for Ubuntu is upstart
