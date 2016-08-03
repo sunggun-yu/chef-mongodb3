@@ -82,6 +82,7 @@ include_recipe 'runit::default'
 runit_service 'mongos' do
   retries 3
   restart_on_update true
+  cookbook node['mongodb3']['service_template_cookbook']
   options ({
               :user => node['mongodb3']['user'],
               :config_file => node['mongodb3']['mongos']['config_file']

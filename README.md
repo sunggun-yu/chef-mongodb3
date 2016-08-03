@@ -68,6 +68,9 @@ default['mongodb3']['mongod']['config_file'] = '/etc/mongod.conf'
 # Mongos config file path
 default['mongodb3']['mongos']['config_file'] = '/etc/mongos.conf'
 
+# Cookbook for init scripts
+default['mongodb3']['service_template_cookbook'] = 'mongodb3'
+
 # Key file contents
 default['mongodb3']['config']['key_file_content'] = nil
 ```
