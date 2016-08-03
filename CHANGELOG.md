@@ -1,5 +1,11 @@
 # mongodb3 Cookbook CHANGELOG
 
+## Next (5.3.0)
+
+* PR #39 : Adding support for ubuntu 15.04 and 16.04. Marcin Skurski([@mskurski](https://github.com/mskurski))
+* Adding support for ubuntu 15.04 and 16.04
+* Changing service provider to `Chef::Provider::Service::Systemd` for ubuntu >= 15.04
+
 ## 5.2.0
 
 * PR #35 : bypass dpkg errors about pre-existing init or conf file. Damien Raude-Morvan([@drazzib](https://github.com/drazzib))

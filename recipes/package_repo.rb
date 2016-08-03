@@ -97,7 +97,12 @@ case node['platform_family']
   when 'debian'
     apt_repository "mongodb-org-#{pkg_major_version}" do
       uri node['mongodb3']['package']['repo']['url']
-      distribution "#{node['lsb']['codename']}/mongodb-org/#{node['mongodb3']['package']['repo']['apt']['name']}"
+      if node['platform'] == 'ubuntu' and node['platform_version'].to_f == 15.04
+        # seems that mongodb supports only LTS versions of Ubuntu
+        distribution "trusty/mongodb-org/#{node['mongodb3']['package']['repo']['apt']['name']}"
+      else
+        distribution "#{node['lsb']['codename']}/mongodb-org/#{node['mongodb3']['package']['repo']['apt']['name']}"
+      end
       components node['mongodb3']['package']['repo']['apt']['components']
       keyserver node['mongodb3']['package']['repo']['apt']['keyserver']
       key node['mongodb3']['package']['repo']['apt']['key']

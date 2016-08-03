@@ -102,11 +102,24 @@ service 'disable-transparent-hugepages' do
   }
 end
 
+# Create the mongod.service file
+case node['platform']
+when 'ubuntu'
+  if node['platform_version'].to_f >= 16.04
+    template '/lib/systemd/system/mongod.service' do
+      source 'mongod.service.erb'
+      mode 0644
+    end
+  end
+end
+
 # Start the mongod service
 service 'mongod' do
   case node['platform']
     when 'ubuntu'
-      if node['platform_version'].to_f >= 14.04
+      if node['platform_version'].to_f >= 15.04
+        provider Chef::Provider::Service::Systemd
+      elsif node['platform_version'].to_f >= 14.04
         provider Chef::Provider::Service::Upstart
       end
   end
