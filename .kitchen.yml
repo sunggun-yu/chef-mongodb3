@@ -51,6 +51,9 @@ suites:
           log_level: info
       build-essential:
         compile_time: false
+      mongodb3:
+        mongod:
+          disable-transparent-hugepages: true
     provisioner:
       client_rb:
         environment: dev
