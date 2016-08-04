@@ -90,20 +90,6 @@ suites:
       - ubuntu-14.04
       - centos-7.2
 
-  - name: chef-client-11
-    driver:
-      vm_hostname: mongo3
-    driver_config:
-      require_chef_omnibus: 11.18.12
-    run_list:
-      - recipe[mongodb3::default]
-    excludes:
-      - debian-7.8
-      - oel-6.6
-      - ami-2014.03
-      - ubuntu-15.04
-      - ubuntu-16.04
-
   - name: default-30x
     run_list:
       - recipe[mongodb3-test::default-30x]

@@ -12,8 +12,9 @@
 
 ### NOTICE :
 
-* Current version is not supporting automation and monitoring mms agent installation for Debian 7.8
-* MongoDB 3.2.4 is default version of mongodb3 cookbook
+* Current version is not supporting automation and monitoring mms agent installation for Debian 7.8.
+* MongoDB 3.2.8 is default version of mongodb3 cookbook.
+* Mongodb3 cookbook is no longer support Chef Client version 11.
 
 ### Contributors
 
@@ -911,7 +912,7 @@ mmsBaseUrl=https://api-agents.mongodb.com
 Author:: Sunggun Yu (sunggun.dev@gmail.com)
 
 ```text
-Copyright (c) 2015, Sunggun Yu.
+Copyright (c) 2016, Sunggun Yu.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
