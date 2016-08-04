@@ -18,7 +18,7 @@
 #
 
 # MongoDB version to install
-default['mongodb3']['version'] = '3.2.4'
+default['mongodb3']['version'] = '3.2.8'
 
 # Please note : The default values for ['mongodb3']['package'] attributes will be set in `package_repo` recipe.
 # but, You can set custom values for yum/apt repo url, yum package version or apt related in your wrapper

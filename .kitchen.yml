@@ -22,13 +22,25 @@ platforms:
     attributes:
       apt:
         compile_time_update: true
+  - name: ubuntu-15.04
+    run_list:
+    - recipe[apt]
+    attributes:
+      apt:
+        compile_time_update: true
+  - name: ubuntu-16.04
+    run_list:
+    - recipe[apt]
+    attributes:
+      apt:
+        compile_time_update: true
   - name: debian-7.8
     run_list:
     - recipe[apt]
     attributes:
       apt:
         compile_time_update: true
-  - name: centos-6.6
+  - name: centos-6.8
   - name: centos-7.2
   - name: oel-6.6
     driver:
@@ -89,6 +101,8 @@ suites:
       - debian-7.8
       - oel-6.6
       - ami-2014.03
+      - ubuntu-15.04
+      - ubuntu-16.04
 
   - name: default-30x
     run_list:
@@ -97,6 +111,8 @@ suites:
     excludes:
       - oel-6.6
       - ami-2014.03
+      - ubuntu-15.04
+      - ubuntu-16.04
 
   - name: replica
     driver:
@@ -175,6 +191,7 @@ suites:
     excludes:
       - oel-6.6
       - ami-2014.03
+      - ubuntu-16.04
 
   - name: mms-automation-agent
     driver:
