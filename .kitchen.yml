@@ -41,7 +41,11 @@ platforms:
       apt:
         compile_time_update: true
   - name: centos-6.8
+    driver:
+      box: bento/centos-6.8
   - name: centos-7.2
+    driver:
+      box: bento/centos-7.2
   - name: oel-6.6
     driver:
       box: rafacas/oel66-plain
