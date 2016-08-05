@@ -126,13 +126,12 @@ end
 
 # Create the mongod.service file
 case node['platform']
-when 'ubuntu'
-  if node['platform_version'].to_f >= 15.04
+  when 'ubuntu'
     template '/lib/systemd/system/mongod.service' do
       source 'mongod.service.erb'
       mode 0644
+      only_if { node['platform_version'].to_f >= 15.04 }
     end
-  end
 end
 
 # Start the mongod service
