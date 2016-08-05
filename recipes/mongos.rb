@@ -44,7 +44,7 @@ template node['mongodb3']['mongos']['config_file'] do
       :config => node['mongodb3']['config']['mongos']
   )
   helpers Mongodb3Helper
-  notifies :restart, "runit_service[mongos]"
+  notifies :restart, 'runit_service[mongos]'
 end
 
 # Create the log directory
@@ -82,7 +82,7 @@ include_recipe 'runit::default'
 runit_service 'mongos' do
   retries 3
   restart_on_update true
-  cookbook node['mongodb3']['service_template_cookbook']
+  cookbook node['mongodb3']['mongos']['runit_template_cookbook']
   options ({
               :user => node['mongodb3']['user'],
               :config_file => node['mongodb3']['mongos']['config_file']
