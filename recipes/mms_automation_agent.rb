@@ -28,8 +28,13 @@ case node['platform_family']
     mms_agent_source = 'https://cloud.mongodb.com/download/agent/automation/mongodb-mms-automation-agent-manager-latest.x86_64.rpm'
     mms_agent_file = '/root/mongodb-mms-automation-agent-manager-latest.x86_64.rpm'
   when 'debian'
-    mms_agent_source = 'https://cloud.mongodb.com/download/agent/automation/mongodb-mms-automation-agent-manager_latest_amd64.deb'
-    mms_agent_file = '/root/mongodb-mms-automation-agent-manager_latest_amd64.deb'
+    if node['platform'] == 'ubuntu' && node['platform_version'].to_f >= 15.04
+      mms_agent_source = 'https://cloud.mongodb.com/download/agent/automation/mongodb-mms-automation-agent-manager_latest_amd64.ubuntu1604.deb'
+      mms_agent_file = '/root/mongodb-mms-automation-agent-manager_latest_amd64.ubuntu1604.deb'
+    else
+      mms_agent_source = 'https://cloud.mongodb.com/download/agent/automation/mongodb-mms-automation-agent-manager_latest_amd64.deb'
+      mms_agent_file = '/root/mongodb-mms-automation-agent-manager_latest_amd64.deb'
+    end
 end
 
 # Download the mms automation agent manager latest
@@ -78,6 +83,7 @@ end
 service 'mongodb-mms-automation-agent' do
   # The service provider of MMS Agent for Ubuntu is upstart
   provider Chef::Provider::Service::Upstart if node['platform_family'] == 'debian'
+  provider Chef::Provider::Service::Systemd if node['platform'] == 'ubuntu' && node['platform_version'].to_f >= 15.04
   supports :status => true, :restart => true, :stop => true
   action [ :enable, :start ]
 end
