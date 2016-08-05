@@ -1,10 +1,23 @@
 # mongodb3 Cookbook CHANGELOG
 
-## Next (5.3.0)
+## 5.3.0
 
+Thank you so much for your huge contribution on this release!
+
+* PR #36 : The mongos service shall be restarted to pick the new config. Jose Olcese([@jolcese](https://github.com/jolcese))
+* PR #38 : Enable/Disable Transparent Huge Pages if needed. Dennis Pattmann([@dpattmann](https://github.com/dpattmann))
+ * The cookbook disable the Transparent Huge Pages by default.
 * PR #39 : Adding support for ubuntu 15.04 and 16.04. Marcin Skurski([@mskurski](https://github.com/mskurski))
-* Adding support for ubuntu 15.04 and 16.04
-* Changing service provider to `Chef::Provider::Service::Systemd` for ubuntu >= 15.04
+ * Changing service provider to `Chef::Provider::Service::Systemd` for ubuntu >= 15.04
+ * Fix #44
+* PR #40 : Allow override of the cookbook used for mongos runit templates. Popsikle([@popsikle](https://github.com/popsikle))
+* PR #41 : Create and set ownership of data directory for mms-automation-agent. Amsdard([@amsdard](https://github.com/amsdard))
+* Adding support Ubuntu 15.04 and 16.04 for MMS Automation and Monitoring Agent.
+* Testing in CentOS 6.8. 
+ * 6.6 was missing in bento.
+* No longer support Chef Client version 11.
+ * Chef Client version issue related to Custom Resources
+ * It is also decision for upcoming LWRP in mongodb3 cookbook.
 
 ## 5.2.0
 
